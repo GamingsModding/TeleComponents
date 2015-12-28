@@ -1,9 +1,7 @@
 package com.gamingsmod.telecomponents.item;
 
-import com.gamingsmod.telecomponents.handler.ConfigurationHandler;
 import com.gamingsmod.telecomponents.reference.Reference;
 import com.gamingsmod.telecomponents.utility.NBTHelper;
-import com.typesafe.config.Config;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.List;
 
