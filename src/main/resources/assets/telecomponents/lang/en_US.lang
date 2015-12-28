@@ -1,0 +1,25 @@
+#Creative Groups
+itemGroup.telecomponents=TeleComponents
+
+#Item Localization
+item.telecomponents:teleIngot.name=TeleIngot
+item.telecomponents:enderPearlGun.name=Ender Pearl Gun
+item.telecomponents:enderStick.name=Ender Stick
+item.telecomponents:enderPearlCreationCore.name=Ender Pearl Creation Core
+
+#Tool Localization
+item.telecomponents:teleIngotPickaxe.name=TeleIngot Pickaxe
+item.telecomponents:teleIngotSword.name=TeleIngot Sword
+item.telecomponents:teleIngotSpade.name=TeleIngot Spade
+item.telecomponents:teleIngotAxe.name=TeleIngot Axe
+item.telecomponents:teleIngotHoe.name=TeleIngot Hoe
+
+#Armor Localization
+item.telecomponents:teleIngotHelmet.name=TeleIngot Helmet
+item.telecomponents:teleIngotChest.name=TeleIngot Chestplate
+item.telecomponents:teleIngotLegs.name=TeleIngot Leggings
+item.telecomponents:teleIngotBoots.name=TeleIngot Boots
+
+#Block Localization
+tile.telecomponents:teleIngotBlock.name=TeleIngot Block
+tile.telecomponents:compressedEndStone.name=Compressed End Stone

@@ -1,0 +1,21 @@
+[
+{
+  "modid": "TeleComponents",
+  "name": "TeleComponents",
+  "description": "Make teleporting easy... Do it to anywhere for FREE. Use the power of ender pearls!",
+  "version": "0.1.0",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [
+    "RageGamingPE"
+  ],
+  "credits": "Programming: RageGamingPE, Textures: HardcoreGamingMC",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
