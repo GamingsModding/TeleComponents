@@ -22,4 +22,5 @@ item.telecomponents:teleIngotBoots.name=TeleIngot Boots
 
 #Block Localization
 tile.telecomponents:teleIngotBlock.name=TeleIngot Block
+tile.telecomponents:teleBlock.name=TeleBlock
 tile.telecomponents:compressedEndStone.name=Compressed End Stone
