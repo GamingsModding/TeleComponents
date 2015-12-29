@@ -6,7 +6,7 @@ import com.gamingsmod.telecomponents.common.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
-public class ModArmor
+public final class ModArmor
 {
     public static final ItemArmorTeleC teleIngotHelmet = new ItemTeleHelmet(Material.Armor.TELEINGOT);
     public static final ItemArmorTeleC teleIngotChest = new ItemTeleChest(Material.Armor.TELEINGOT);

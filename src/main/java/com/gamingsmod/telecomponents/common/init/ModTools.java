@@ -7,7 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
-public class ModTools
+public final class ModTools
 {
     public static final Item toolTelePickaxe = new ItemTelePickaxe(Material.Tools.TELEINGOT);
     public static final Item toolTeleSword = new ItemTeleSword(Material.Tools.TELEINGOT);

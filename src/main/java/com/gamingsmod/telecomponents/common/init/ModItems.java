@@ -5,7 +5,7 @@ import com.gamingsmod.telecomponents.common.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
-public class ModItems
+public final class ModItems
 {
     public static final ItemTeleC teleIngot = new ItemTeleIngot();
     public static final ItemTeleC enderPearlGun = new ItemEPGun();
