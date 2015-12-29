@@ -24,9 +24,6 @@ public class ShapedRecipes
         GameRegistry.addRecipe(new ItemStack(ModTools.toolTeleSword), "i", "i", "s",
                 'i', new ItemStack(ModItems.teleIngot),
                 's', new ItemStack(ModItems.enderStick));
-        GameRegistry.addRecipe(new ItemStack(ModTools.toolTeleSword), "i", "i", "s",
-                'i', new ItemStack(ModItems.teleIngot),
-                's', new ItemStack(ModItems.enderStick));
         GameRegistry.addRecipe(new ItemStack(ModTools.toolTeleAxe), "ii ", "is ", " s ",
                 'i', new ItemStack(ModItems.teleIngot),
                 's', new ItemStack(ModItems.enderStick));
