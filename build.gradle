@@ -17,12 +17,15 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-0.1.0"
+ext.configFile = file('gradle.properties')
+ext.config = parseConfig(configFile)
+
+version = "${config.mod_version}-${config.mc_version}"
 group= "com.gamingsmod.telecomponents" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "telecomponents"
 
 minecraft {
-    version = "1.7.10-10.13.4.1558-1.7.10"
+    version = "${config.mc_version}-${config.forge_version}"
     runDir = "eclipse"
 }
 
@@ -59,5 +62,19 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+/**
+ * Parse config file
+ * @param File config
+ * @return
+ */
+
+def parseConfig(File config) {
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
     }
 }
