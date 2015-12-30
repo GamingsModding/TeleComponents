@@ -41,13 +41,13 @@ public class ItemArmorTeleC extends ItemArmor
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
     {
         if (itemStack.getItem().equals(ModArmor.teleIngotHelmet))
-            player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 100));
+            player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 100, 0, true));
 
         if (itemStack.getItem().equals(ModArmor.teleIngotLegs))
-            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100));
+            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 1, true));
 
         if (itemStack.getItem().equals(ModArmor.teleIngotBoots))
-            player.addPotionEffect(new PotionEffect(Potion.jump.id, 100));
+            player.addPotionEffect(new PotionEffect(Potion.jump.id, 100, 0, true));
 
     }
 
