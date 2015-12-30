@@ -11,6 +11,7 @@ public final class ModItems
     public static final ItemTeleC enderPearlGun = new ItemEPGun();
     public static final ItemTeleC enderStick = new ItemEnderStick();
     public static final ItemTeleC epCreationCore = new ItemEPCreationCore();
+    public static final ItemTeleC telePos = new ItemTelePos();
 
     public static void init()
     {
@@ -18,5 +19,6 @@ public final class ModItems
         GameRegistry.registerItem(enderPearlGun, "enderPearlGun");
         GameRegistry.registerItem(enderStick, "enderStick");
         GameRegistry.registerItem(epCreationCore, "enderPearlCreationCore");
+        GameRegistry.registerItem(telePos, "telePositionPointer");
     }
 }
