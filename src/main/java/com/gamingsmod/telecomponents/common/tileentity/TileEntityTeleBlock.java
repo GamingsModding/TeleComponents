@@ -10,7 +10,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 
-// Code used from BedrockMiner because I am a idiot
+// Code copied from BedrockMiner because I am a idiot
 // @source http://bedrockminer.jimdo.com/modding-tutorials/advanced-modding/tile-entity-with-inventory/
 
 public class TileEntityTeleBlock extends TileEntity implements IInventory

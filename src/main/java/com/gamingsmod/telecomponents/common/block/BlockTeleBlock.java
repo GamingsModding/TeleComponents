@@ -34,16 +34,18 @@ public class BlockTeleBlock extends BlockContainerTeleC {
         return true;
     }
 
+    // Code copied from TileEntityChest because it is easier to copy the code as it is the same as every inventory
+    // in the game
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        TileEntityTeleBlock tileentitychest = (TileEntityTeleBlock)world.getTileEntity(x, y, z);
+        TileEntityTeleBlock te = (TileEntityTeleBlock)world.getTileEntity(x, y, z);
         Random random = new Random();
 
-        if (tileentitychest != null)
+        if (te != null)
         {
-            for (int i1 = 0; i1 < tileentitychest.getSizeInventory(); ++i1)
+            for (int i1 = 0; i1 < te.getSizeInventory(); ++i1)
             {
-                ItemStack itemstack = tileentitychest.getStackInSlot(i1);
+                ItemStack itemstack = te.getStackInSlot(i1);
 
                 if (itemstack != null)
                 {
