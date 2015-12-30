@@ -93,7 +93,6 @@ gradle-app.setting
 ### Eclipse ###
 *.pydevproject
 .metadata
-.gradle
 bin/
 tmp/
 *.tmp
