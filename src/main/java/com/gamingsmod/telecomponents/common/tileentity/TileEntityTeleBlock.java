@@ -10,7 +10,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 
-// Code copied from BedrockMiner because I am a idiot
+// Code adapted from BedrockMiner because I am an idiot
 // @source http://bedrockminer.jimdo.com/modding-tutorials/advanced-modding/tile-entity-with-inventory/
 
 public class TileEntityTeleBlock extends TileEntity implements IInventory
@@ -40,7 +40,6 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
         return this.customName != null && !this.customName.equals("");
     }
 
-//    @Override
     public IChatComponent getDisplayName() {
         return this.hasCustomInventoryName() ? new ChatComponentText(this.getInventoryName()) : new ChatComponentTranslation(this.getInventoryName());
     }
@@ -131,16 +130,13 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
         return true;
     }
 
-//    @Override
     public int getField(int id) {
         return 0;
     }
 
-//    @Override
     public void setField(int id, int value) {
     }
 
-//    @Override
     public int getFieldCount() {
         return 0;
     }

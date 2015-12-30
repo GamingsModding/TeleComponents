@@ -34,8 +34,9 @@ public class BlockTeleBlock extends BlockContainerTeleC {
         return true;
     }
 
-    // Code copied from TileEntityChest because it is easier to copy the code as it is the same as every inventory
+    // Code copied from BlockChest because it is easier to copy the code as it is the same as every inventory
     // in the game
+    // @source net.minecraft.block.BlockChest
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         TileEntityTeleBlock te = (TileEntityTeleBlock)world.getTileEntity(x, y, z);
