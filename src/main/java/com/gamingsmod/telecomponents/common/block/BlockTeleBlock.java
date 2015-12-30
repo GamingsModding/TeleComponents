@@ -3,6 +3,7 @@ package com.gamingsmod.telecomponents.common.block;
 import com.gamingsmod.telecomponents.common.TeleComponents;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
+import com.gamingsmod.telecomponents.common.utility.LogHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.command.server.CommandTeleport;
@@ -91,6 +92,7 @@ public class BlockTeleBlock extends BlockContainerTeleC
         if (stack.hasDisplayName()) {
             ((TileEntityTeleBlock) world.getTileEntity(x, y, z)).setCustomName(stack.getDisplayName());
         }
+        ((TileEntityTeleBlock) world.getTileEntity(x, y, z)).setPlayerName(((EntityPlayer) player).getDisplayName());
     }
 
     @Override
@@ -107,6 +109,7 @@ public class BlockTeleBlock extends BlockContainerTeleC
                     int yCoord = NBTHelper.getInt(item, "yCoord");
                     int zCoord = NBTHelper.getInt(item, "zCoord");
                     player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                    LogHelper.info("The TeleBlock placed by " + te.getPlayerName() + " teleported " + player.getDisplayName() + " to " + xCoord + ", " + yCoord + ", " + zCoord);
                 }
             }
         }

@@ -17,6 +17,7 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
 {
     private ItemStack[] inventory;
     private String customName;
+    private String playerName;
 
     public TileEntityTeleBlock() {
         this.inventory = new ItemStack[this.getSizeInventory()];
@@ -28,6 +29,16 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
 
     public void setCustomName(String customName) {
         this.customName = customName;
+    }
+
+    public String getPlayerName()
+    {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName)
+    {
+        this.playerName = playerName;
     }
 
     @Override
@@ -166,6 +177,7 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
         if (this.hasCustomInventoryName()) {
             nbt.setString("CustomName", this.getCustomName());
         }
+        nbt.setString("PlayerName", this.getPlayerName());
     }
 
 
@@ -183,6 +195,7 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
         if (nbt.hasKey("CustomName", 8)) {
             this.setCustomName(nbt.getString("CustomName"));
         }
+        this.setPlayerName(nbt.getString("PlayerName"));
     }
 
 }
