@@ -4,6 +4,7 @@ import com.gamingsmod.telecomponents.common.TeleComponents;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
 import net.minecraft.block.Block;
+import net.minecraft.command.server.CommandTeleport;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -95,8 +96,10 @@ public class BlockTeleBlock extends BlockContainerTeleC
         if (!world.isRemote && world.isBlockIndirectlyGettingPowered(x, y, z))
         {
             EntityPlayer player = world.getClosestPlayer(x, y, z, 5);
-            if (player != null)
+            if (player != null) {
                 System.out.println(player.getDisplayName());
+                player.setPositionAndUpdate(x, y, z);
+            }
         }
     }
 }

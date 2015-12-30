@@ -6,6 +6,7 @@ item.telecomponents:teleIngot.name=TeleIngot
 item.telecomponents:enderPearlGun.name=Ender Pearl Gun
 item.telecomponents:enderStick.name=Ender Stick
 item.telecomponents:enderPearlCreationCore.name=Ender Pearl Creation Core
+item.telecomponents:telePositionPointer.name=Teleport Position Pointer
 
 #Tool Localization
 item.telecomponents:teleIngotPickaxe.name=TeleIngot Pickaxe
