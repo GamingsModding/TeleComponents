@@ -28,8 +28,20 @@ public class ItemTelePos extends ItemTeleC
         NBTHelper.setInteger(itemStack, "zCoord", z);
 
         player.addChatComponentMessage(new ChatComponentText("Coordinates set to: X: " + x + ", Y: " + (y + 1) + ", Z: " + z).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.LIGHT_PURPLE)));
-
-//        this.addInformation(itemStack, player);
         return true;
+    }
+
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        if (player.isSneaking())
+        {
+            int x = NBTHelper.getInt(itemStack, "xCoord");
+            int y = NBTHelper.getInt(itemStack, "yCoord");
+            int z = NBTHelper.getInt(itemStack, "zCoord");
+
+            player.addChatComponentMessage(new ChatComponentText("Coordinates are set to: X: " + x + ", Y: " + y + ", Z: " + z).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.LIGHT_PURPLE)));
+        }
+
+        return itemStack;
     }
 }
