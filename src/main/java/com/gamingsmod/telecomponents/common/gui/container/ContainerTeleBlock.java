@@ -16,8 +16,8 @@ public class ContainerTeleBlock extends Container
     {
         /**
          * Tile Entity TeleBlock    Number of Slots: 1      Slot IDs: 0-0
-         * Player Inventory         Number of Slots: 27     Slot IDs: 9-36
-         * Player Hotbar            Number of Slots: 9      Slot IDs: 0-8
+         * Player Inventory         Number of Slots: 27     Slot IDs: 1-28
+         * Player Hotbar            Number of Slots: 9      Slot IDs: 29-38
          */
 
         this.te = te;
@@ -86,7 +86,6 @@ public class ContainerTeleBlock extends Container
 
         return stack;
     }
-
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {

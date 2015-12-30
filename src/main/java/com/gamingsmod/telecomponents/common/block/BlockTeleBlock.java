@@ -3,6 +3,7 @@ package com.gamingsmod.telecomponents.common.block;
 import com.gamingsmod.telecomponents.common.TeleComponents;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
+import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.command.server.CommandTeleport;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,7 +31,8 @@ public class BlockTeleBlock extends BlockContainerTeleC
     }
 
     @Override
-    public boolean onBlockActivated(World world, int blockx, int blocky, int blockz, EntityPlayer player, int face, float flt1, float flt2, float flt3) {
+    public boolean onBlockActivated(World world, int blockx, int blocky, int blockz, EntityPlayer player, int face, float flt1, float flt2, float flt3)
+    {
         if (!world.isRemote) {
             player.openGui(TeleComponents.instance, GuiHandler.MOD_TELE_BLOCK_ID, world, blockx, blocky, blockz);
         }
@@ -41,7 +43,8 @@ public class BlockTeleBlock extends BlockContainerTeleC
     // in the game
     // @source net.minecraft.block.BlockChest
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+    {
         TileEntityTeleBlock te = (TileEntityTeleBlock) world.getTileEntity(x, y, z);
         Random random = new Random();
 
@@ -83,7 +86,8 @@ public class BlockTeleBlock extends BlockContainerTeleC
 
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
+    {
         if (stack.hasDisplayName()) {
             ((TileEntityTeleBlock) world.getTileEntity(x, y, z)).setCustomName(stack.getDisplayName());
         }
@@ -92,13 +96,18 @@ public class BlockTeleBlock extends BlockContainerTeleC
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
     {
-
         if (!world.isRemote && world.isBlockIndirectlyGettingPowered(x, y, z))
         {
             EntityPlayer player = world.getClosestPlayer(x, y, z, 5);
             if (player != null) {
-                System.out.println(player.getDisplayName());
-                player.setPositionAndUpdate(x, y, z);
+                TileEntityTeleBlock te = (TileEntityTeleBlock) world.getTileEntity(x, y, z);
+                ItemStack item = te.getStackInSlot(0);
+                if (item != null) {
+                    int xCoord = NBTHelper.getInt(item, "xCoord");
+                    int yCoord = NBTHelper.getInt(item, "yCoord");
+                    int zCoord = NBTHelper.getInt(item, "zCoord");
+                    player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                }
             }
         }
     }
