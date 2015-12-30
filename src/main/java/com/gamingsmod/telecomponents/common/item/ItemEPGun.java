@@ -1,5 +1,6 @@
 package com.gamingsmod.telecomponents.common.item;
 
+import com.gamingsmod.telecomponents.common.handler.ConfigurationHandler;
 import com.gamingsmod.telecomponents.common.reference.Reference;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -18,7 +19,7 @@ public class ItemEPGun extends ItemTeleC
 {
     private static final String[] ICONS = {"enderPearlGun_3", "enderPearlGun_2", "enderPearlGun_1", "enderPearlGun"};
     public static final String COOLDOWN_NAME = "cooldown";
-    public static int COOLDOWN_LENGTH = 50;
+    public static int COOLDOWN_LENGTH;
 
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
@@ -29,6 +30,8 @@ public class ItemEPGun extends ItemTeleC
         this.setUnlocalizedName("enderPearlGun");
         this.setMaxStackSize(1);
 //        this.setMaxDamage(255);
+        COOLDOWN_LENGTH = ConfigurationHandler.ENDER_PEARL_GUN_COOLDOWN;
+        System.out.println("enderPearlGun: " + COOLDOWN_LENGTH);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class ItemEPGun extends ItemTeleC
             if(cooldown == 0)
             {
                 world.spawnEntityInWorld(new EntityEnderPearl(world, player));
-//                stack.damageItem(1, player);
+//                stack.damageItem(49, player);
                 NBTHelper.setInteger(stack, COOLDOWN_NAME, COOLDOWN_LENGTH);
                 world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
             }
@@ -58,7 +61,6 @@ public class ItemEPGun extends ItemTeleC
         {
             cooldown = cooldown - 1;
             NBTHelper.setInteger(stack, COOLDOWN_NAME, cooldown);
-//            LogHelper.info("Cooldown: " + cooldown);
             if(cooldown == 0)
                 world.playSoundAtEntity(entity, "random.levelup", 1, 1);
         }
