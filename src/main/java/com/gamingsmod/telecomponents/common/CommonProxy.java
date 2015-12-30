@@ -1,5 +1,6 @@
 package com.gamingsmod.telecomponents.common;
 
+import com.gamingsmod.telecomponents.common.handler.ConfigurationHandler;
 import com.gamingsmod.telecomponents.common.init.*;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.utility.LogHelper;
@@ -14,11 +15,14 @@ public class CommonProxy
 {
     public void preinit(FMLPreInitializationEvent e)
     {
+        ConfigurationHandler.init(e.getSuggestedConfigurationFile());
+
         ModItems.init();
         ModTools.init();
         ModArmor.init();
         ModBlocks.init();
         ModTileEntities.init();
+
         LogHelper.info("Pre Initialization Complete");
     }
 
@@ -26,6 +30,7 @@ public class CommonProxy
     {
         Recipes.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(TeleComponents.instance, new GuiHandler());
+
         LogHelper.info("Initalization Complete");
     }
 
