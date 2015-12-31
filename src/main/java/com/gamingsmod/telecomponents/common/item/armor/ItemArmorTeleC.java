@@ -54,6 +54,11 @@ public class ItemArmorTeleC extends ItemArmor {
             }
         }
 
+        if (    player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem().equals(ModArmor.teleIngotBoots) &&
+                player.getCurrentArmor(1) != null && player.getCurrentArmor(1).getItem().equals(ModArmor.teleIngotLegs) &&
+                player.getCurrentArmor(2) != null && player.getCurrentArmor(2).getItem().equals(ModArmor.teleIngotChest) &&
+                player.getCurrentArmor(3) != null && player.getCurrentArmor(3).getItem().equals(ModArmor.teleIngotHelmet))
+            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 50, 0, true));
     }
 
     @Override
@@ -83,6 +88,10 @@ public class ItemArmorTeleC extends ItemArmor {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+        if (amat.toString().equals("teleingot")) {
+            list.add("Get the protection of the gods");
+        }
+
         if (!itemTooltip.equals("")) {
             list.add(itemTooltip);
         }
