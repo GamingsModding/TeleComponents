@@ -1,5 +1,6 @@
 package com.gamingsmod.telecomponents.common.tileentity;
 
+import com.gamingsmod.telecomponents.common.item.ItemTelePos;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -139,7 +140,7 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return true;
+        return stack.getItem() instanceof ItemTelePos;
     }
 
     public int getField(int id) {
