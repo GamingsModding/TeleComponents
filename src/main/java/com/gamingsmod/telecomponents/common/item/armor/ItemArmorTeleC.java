@@ -17,75 +17,73 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemArmorTeleC extends ItemArmor
-{
+public class ItemArmorTeleC extends ItemArmor {
     public ArmorMaterial amat;
     public int atype;
     public String itemTooltip;
 
-    public ItemArmorTeleC(ArmorMaterial material, ArmorType type, String tooltip)
-    {
+    public ItemArmorTeleC(ArmorMaterial material, ArmorType type, String tooltip) {
         super(material, 0, type.getType());
         this.setCreativeTab(CreativeTabTeleC.TELEC_TAB);
         amat = material;
-        atype  = type.getType();
+        atype = type.getType();
         itemTooltip = tooltip;
     }
 
-    public ItemArmorTeleC(ArmorMaterial material, ArmorType type)
-    {
+    public ItemArmorTeleC(ArmorMaterial material, ArmorType type) {
         this(material, type, "");
     }
 
     @Override
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
-    {
-        if (itemStack.getItem().equals(ModArmor.teleIngotHelmet))
-            player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 100, 0, true));
+    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+        if (itemStack.getItem().equals(ModArmor.teleIngotHelmet)) {
+            if (!player.isPotionActive(Potion.nightVision) || player.getActivePotionEffect(Potion.nightVision).getDuration() < 210) {
+                player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0, true));
+            }
+        }
 
-        if (itemStack.getItem().equals(ModArmor.teleIngotLegs))
-            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 1, true));
+        if (itemStack.getItem().equals(ModArmor.teleIngotLegs)) {
+            if (!player.isPotionActive(Potion.moveSpeed) || player.getActivePotionEffect(Potion.moveSpeed).getDuration() < 210) {
+                player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 300, 1, true));
+            }
+        }
 
-        if (itemStack.getItem().equals(ModArmor.teleIngotBoots))
-            player.addPotionEffect(new PotionEffect(Potion.jump.id, 100, 0, true));
+        if (itemStack.getItem().equals(ModArmor.teleIngotBoots)) {
+            if (!player.isPotionActive(Potion.jump) || player.getActivePotionEffect(Potion.jump).getDuration() < 210) {
+                player.addPotionEffect(new PotionEffect(Potion.jump.id, 300, 1, true));
+            }
+        }
 
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
-    {
-        return Reference.MOD_ID + ":textures/armor/" + this.amat + "_" + (this.atype == 2? "2" : "1") + ".png";
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        return Reference.MOD_ID + ":textures/armor/" + this.amat + "_" + (this.atype == 2 ? "2" : "1") + ".png";
     }
 
     @Override
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
+    public String getUnlocalizedName(ItemStack itemStack) {
         return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
+    protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
-    {
-        if(!itemTooltip.equals(""))
-        {
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+        if (!itemTooltip.equals("")) {
             list.add(itemTooltip);
         }
     }
