@@ -112,15 +112,17 @@ public class BlockTeleBlock extends BlockContainerTeleC
                     Block block1 = world.getBlock(xCoord, yCoord, zCoord);
                     Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
 
-                    if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
-                        if ((!(block1 instanceof BlockStaticLiquid) && !(block2 instanceof BlockStaticLiquid))) {
-                            player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
-                            LogHelper.info("The TeleBlock placed by " + te.getPlayerName() + " teleported " + player.getDisplayName() + " to " + xCoord + ", " + yCoord + ", " + zCoord);
+                    if (yCoord > 0) {
+                        if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
+                            if ((!(block1 instanceof BlockStaticLiquid) && !(block2 instanceof BlockStaticLiquid))) {
+                                player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                                LogHelper.info("The TeleBlock placed by " + te.getPlayerName() + " teleported " + player.getDisplayName() + " to " + xCoord + ", " + yCoord + ", " + zCoord);
+                            } else {
+                                logFailTeleport(te, player, xCoord, yCoord, zCoord, "fluid protection");
+                            }
                         } else {
-                            logFailTeleport(te, player, xCoord, yCoord, zCoord, "fluid protection");
+                            logFailTeleport(te, player, xCoord, yCoord, zCoord, "suffocation protection");
                         }
-                    } else {
-                        logFailTeleport(te, player, xCoord, yCoord, zCoord, "suffocation protection");
                     }
                 }
             }
