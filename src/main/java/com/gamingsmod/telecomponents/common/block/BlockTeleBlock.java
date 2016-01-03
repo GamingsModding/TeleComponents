@@ -5,7 +5,7 @@ import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
 import com.gamingsmod.telecomponents.common.utility.LogHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.command.server.CommandTeleport;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 
 import java.util.List;
 import java.util.Random;
@@ -108,10 +109,26 @@ public class BlockTeleBlock extends BlockContainerTeleC
                     int xCoord = NBTHelper.getInt(item, "xCoord");
                     int yCoord = NBTHelper.getInt(item, "yCoord");
                     int zCoord = NBTHelper.getInt(item, "zCoord");
-                    player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
-                    LogHelper.info("The TeleBlock placed by " + te.getPlayerName() + " teleported " + player.getDisplayName() + " to " + xCoord + ", " + yCoord + ", " + zCoord);
+                    Block block1 = world.getBlock(xCoord, yCoord, zCoord);
+                    Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
+
+                    if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
+                        if ((!(block1 instanceof BlockStaticLiquid) && !(block2 instanceof BlockStaticLiquid))) {
+                            player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                            LogHelper.info("The TeleBlock placed by " + te.getPlayerName() + " teleported " + player.getDisplayName() + " to " + xCoord + ", " + yCoord + ", " + zCoord);
+                        } else {
+                            logFailTeleport(te, player, xCoord, yCoord, zCoord, "fluid protection");
+                        }
+                    } else {
+                        logFailTeleport(te, player, xCoord, yCoord, zCoord, "suffocation protection");
+                    }
                 }
             }
         }
+    }
+
+    private void logFailTeleport(TileEntityTeleBlock te, EntityPlayer player, int xCoord, int yCoord, int zCoord, String reason)
+    {
+        LogHelper.info("The TeleBlock placed by " + te.getPlayerName() + " failed to teleport " + player.getDisplayName() + " to " + xCoord + ", " + yCoord + ", " + zCoord + " because " + reason);
     }
 }
