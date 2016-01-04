@@ -21,7 +21,7 @@ public class ItemPortTeleport extends ItemTeleC
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        if (!world.isRemote) {
+        if (!world.isRemote && player.isSneaking()) {
             int xCoord = NBTHelper.getInt(stack, "xCoord");
             int yCoord = NBTHelper.getInt(stack, "yCoord");
             int zCoord = NBTHelper.getInt(stack, "zCoord");
