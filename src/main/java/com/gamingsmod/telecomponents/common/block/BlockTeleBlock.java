@@ -42,7 +42,7 @@ public class BlockTeleBlock extends BlockContainerTeleC
             if (playerItem != null) {
                 if (playerItem.getItem() instanceof ItemPortTeleport) {
                     NBTHelper.setInteger(playerItem, "xCoord", blockx);
-                    NBTHelper.setInteger(playerItem, "yCoord", blocky);
+                    NBTHelper.setInteger(playerItem, "yCoord", blocky + 1);
                     NBTHelper.setInteger(playerItem, "zCoord", blockz);
                     return true;
                 }
