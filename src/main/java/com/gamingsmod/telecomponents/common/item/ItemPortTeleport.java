@@ -16,17 +16,21 @@ public class ItemPortTeleport extends ItemTeleC
     {
         super();
         this.setUnlocalizedName("portTeleportDevice");
+        this.setMaxStackSize(1);
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        if (!world.isRemote && player.isSneaking()) {
+        if (!world.isRemote) {
             int xCoord = NBTHelper.getInt(stack, "xCoord");
             int yCoord = NBTHelper.getInt(stack, "yCoord");
             int zCoord = NBTHelper.getInt(stack, "zCoord");
+            System.out.println(xCoord + ", " + yCoord + ", " + zCoord);
             Block block1 = world.getBlock(xCoord, yCoord, zCoord);
+            System.out.println(block1.toString());
             Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
+            System.out.println(block1.toString());
 
             if (yCoord > 0) {
                 if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
