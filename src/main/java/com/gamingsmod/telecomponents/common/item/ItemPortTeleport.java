@@ -4,8 +4,12 @@ import com.gamingsmod.telecomponents.common.utility.LogHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -17,6 +21,7 @@ public class ItemPortTeleport extends ItemTeleC
         super();
         this.setUnlocalizedName("portTeleportDevice");
         this.setMaxStackSize(1);
+        this.setMaxDamage(5000);
     }
 
     @Override
@@ -26,21 +31,28 @@ public class ItemPortTeleport extends ItemTeleC
             int xCoord = NBTHelper.getInt(stack, "xCoord");
             int yCoord = NBTHelper.getInt(stack, "yCoord");
             int zCoord = NBTHelper.getInt(stack, "zCoord");
-            System.out.println(xCoord + ", " + yCoord + ", " + zCoord);
             Block block1 = world.getBlock(xCoord, yCoord, zCoord);
-            System.out.println(block1.toString());
             Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
-            System.out.println(block1.toString());
+            stack.damageItem(4999, player);
 
             if (yCoord > 0) {
                 if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
                     if ((!(block1 instanceof BlockStaticLiquid) && !(block2 instanceof BlockStaticLiquid))) {
                         player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                        return stack;
                     }
                 }
+
+                player.addChatComponentMessage(new ChatComponentText("Teleport failed").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             }
         }
         return stack;
+    }
+
+    @Override
+    public void onUpdate(ItemStack stack, World world, Entity player, int int1, boolean bool1) {
+       if (stack.getItemDamage() < stack.getMaxDamage())
+           stack.setItemDamage(stack.getItemDamage() - 1);
     }
 
     @Override
