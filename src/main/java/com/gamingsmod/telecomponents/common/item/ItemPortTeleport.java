@@ -21,29 +21,31 @@ public class ItemPortTeleport extends ItemTeleC
         super();
         this.setUnlocalizedName("portTeleportDevice");
         this.setMaxStackSize(1);
-        this.setMaxDamage(5000);
+        this.setMaxDamage(500);
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
         if (!world.isRemote) {
-            int xCoord = NBTHelper.getInt(stack, "xCoord");
-            int yCoord = NBTHelper.getInt(stack, "yCoord");
-            int zCoord = NBTHelper.getInt(stack, "zCoord");
-            Block block1 = world.getBlock(xCoord, yCoord, zCoord);
-            Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
-            stack.damageItem(4999, player);
+            if (stack.getItemDamage() == 0) {
+                int xCoord = NBTHelper.getInt(stack, "xCoord");
+                int yCoord = NBTHelper.getInt(stack, "yCoord");
+                int zCoord = NBTHelper.getInt(stack, "zCoord");
+                Block block1 = world.getBlock(xCoord, yCoord, zCoord);
+                Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
+                stack.damageItem(499, player);
 
-            if (yCoord > 0) {
-                if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
-                    if ((!(block1 instanceof BlockStaticLiquid) && !(block2 instanceof BlockStaticLiquid))) {
-                        player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
-                        return stack;
+                if (yCoord > 0) {
+                    if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
+                        if ((!(block1 instanceof BlockStaticLiquid) && !(block2 instanceof BlockStaticLiquid))) {
+                            player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                            return stack;
+                        }
                     }
-                }
 
-                player.addChatComponentMessage(new ChatComponentText("Teleport failed").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                    player.addChatComponentMessage(new ChatComponentText("Teleport failed").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                }
             }
         }
         return stack;
