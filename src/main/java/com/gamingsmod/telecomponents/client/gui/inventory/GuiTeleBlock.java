@@ -3,7 +3,6 @@ package com.gamingsmod.telecomponents.client.gui.inventory;
 import com.gamingsmod.telecomponents.common.gui.container.ContainerTeleBlock;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 

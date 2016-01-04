@@ -1,8 +1,6 @@
 package com.gamingsmod.telecomponents.common;
 
-import com.gamingsmod.telecomponents.common.init.*;
 import com.gamingsmod.telecomponents.common.reference.Reference;
-import com.gamingsmod.telecomponents.common.utility.LogHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;

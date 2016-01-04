@@ -4,10 +4,9 @@ import com.gamingsmod.telecomponents.common.TeleComponents;
 import com.gamingsmod.telecomponents.common.item.ItemPortTeleport;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
-import com.gamingsmod.telecomponents.common.utility.LogHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
-import net.minecraft.block.*;
-import net.minecraft.command.server.CommandTeleport;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,9 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
 
-import java.util.List;
 import java.util.Random;
 
 public class BlockTeleBlock extends BlockContainerTeleC

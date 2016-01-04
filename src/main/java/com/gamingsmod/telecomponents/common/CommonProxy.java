@@ -9,8 +9,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-import java.net.NetworkInterface;
-
 public class CommonProxy
 {
     public void preinit(FMLPreInitializationEvent e)

@@ -1,6 +1,5 @@
 package com.gamingsmod.telecomponents.common.item;
 
-import com.gamingsmod.telecomponents.common.utility.LogHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;

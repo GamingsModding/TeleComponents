@@ -2,8 +2,8 @@ package com.gamingsmod.telecomponents.common.item.armor;
 
 import com.gamingsmod.telecomponents.common.creativetab.CreativeTabTeleC;
 import com.gamingsmod.telecomponents.common.init.ModArmor;
-import com.gamingsmod.telecomponents.common.reference.Reference;
 import com.gamingsmod.telecomponents.common.reference.ArmorType;
+import com.gamingsmod.telecomponents.common.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
