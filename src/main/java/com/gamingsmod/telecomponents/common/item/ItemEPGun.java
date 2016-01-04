@@ -18,8 +18,6 @@ import java.util.List;
 public class ItemEPGun extends ItemTeleC
 {
     private static final String[] ICONS = {"enderPearlGun_3", "enderPearlGun_2", "enderPearlGun_1", "enderPearlGun"};
-    public static final String COOLDOWN_NAME = "cooldown";
-    public static int COOLDOWN_LENGTH;
 
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
@@ -29,9 +27,7 @@ public class ItemEPGun extends ItemTeleC
         super();
         this.setUnlocalizedName("enderPearlGun");
         this.setMaxStackSize(1);
-//        this.setMaxDamage(255);
-        COOLDOWN_LENGTH = ConfigurationHandler.ENDER_PEARL_GUN_COOLDOWN;
-        System.out.println("enderPearlGun: " + COOLDOWN_LENGTH);
+        this.setMaxDamage(ConfigurationHandler.ENDER_PEARL_GUN_COOLDOWN);
     }
 
     @Override
@@ -39,13 +35,12 @@ public class ItemEPGun extends ItemTeleC
     {
         if (!world.isRemote)
         {
-            int cooldown = NBTHelper.getInt(stack, COOLDOWN_NAME);
+            int cooldown = stack.getItemDamage();
 
             if(cooldown == 0)
             {
                 world.spawnEntityInWorld(new EntityEnderPearl(world, player));
-//                stack.damageItem(49, player);
-                NBTHelper.setInteger(stack, COOLDOWN_NAME, COOLDOWN_LENGTH);
+                stack.damageItem(49, player);
                 world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
             }
         }
@@ -55,13 +50,9 @@ public class ItemEPGun extends ItemTeleC
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int int1, boolean bool1)
     {
-        int cooldown = NBTHelper.getInt(stack, COOLDOWN_NAME);
-
-        if (cooldown > 0)
-        {
-            cooldown = cooldown - 1;
-            NBTHelper.setInteger(stack, COOLDOWN_NAME, cooldown);
-            if(cooldown == 0)
+        if (stack.getItemDamage() < stack.getMaxDamage()) {
+            stack.setItemDamage(stack.getItemDamage() - 1);
+            if(stack.getItemDamage() == 0)
                 world.playSoundAtEntity(entity, "random.levelup", 1, 1);
         }
 
@@ -89,21 +80,14 @@ public class ItemEPGun extends ItemTeleC
     @Override
     public IIcon getIcon(ItemStack stack, int renderpass)
     {
-        int cooldown = NBTHelper.getInt(stack, COOLDOWN_NAME);
-        if (cooldown >= (COOLDOWN_LENGTH / 4 * 3))
+        int cooldown = stack.getItemDamage();
+        if (cooldown >= (stack.getMaxDamage() / 4 * 3))
             return icons[0];
-        else if (cooldown >= (COOLDOWN_LENGTH / 4 * 2))
+        else if (cooldown >= (stack.getMaxDamage() / 4 * 2))
             return icons[1];
-        else if (cooldown >= (COOLDOWN_LENGTH / 4))
+        else if (cooldown >= (stack.getMaxDamage() / 4))
             return icons[2];
         else
             return icons[3];
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool1)
-    {
-        int cooldown = NBTHelper.getInt(stack, COOLDOWN_NAME);
-        list.add("Cooldown: " + cooldown + "/" + COOLDOWN_LENGTH);
     }
 }
