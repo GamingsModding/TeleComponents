@@ -25,6 +25,7 @@ public class ItemTelePos extends ItemTeleC
         NBTHelper.setInteger(itemStack, "xCoord", x);
         NBTHelper.setInteger(itemStack, "yCoord", y + 1);
         NBTHelper.setInteger(itemStack, "zCoord", z);
+        NBTHelper.setInteger(itemStack, "dimNum", world.provider.dimensionId);
 
         player.addChatComponentMessage(new ChatComponentText("Coordinates set to: X: " + x + ", Y: " + (y + 1) + ", Z: " + z).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.LIGHT_PURPLE)));
         this.onItemRightClick(itemStack, world, player);
@@ -43,8 +44,10 @@ public class ItemTelePos extends ItemTeleC
         int x = NBTHelper.getInt(itemStack, "xCoord");
         int y = NBTHelper.getInt(itemStack, "yCoord");
         int z = NBTHelper.getInt(itemStack, "zCoord");
+        int dim = NBTHelper.getInt(itemStack, "dimNum");
         list.add("X: " + x);
         list.add("Y: " + y);
         list.add("Z: " + z);
+        list.add("Dimension: " + dim);
     }
 }
