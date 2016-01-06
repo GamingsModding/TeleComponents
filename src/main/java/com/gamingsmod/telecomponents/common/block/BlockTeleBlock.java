@@ -1,12 +1,12 @@
 package com.gamingsmod.telecomponents.common.block;
 
 import com.gamingsmod.telecomponents.common.TeleComponents;
+import com.gamingsmod.telecomponents.common.handler.TeleportHelper;
 import com.gamingsmod.telecomponents.common.item.ItemPortTeleport;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 
 import java.util.Random;
 
@@ -117,13 +118,19 @@ public class BlockTeleBlock extends BlockContainerTeleC
                     int xCoord = NBTHelper.getInt(item, "xCoord");
                     int yCoord = NBTHelper.getInt(item, "yCoord");
                     int zCoord = NBTHelper.getInt(item, "zCoord");
+                    int dimNum = NBTHelper.getInt(item, "dimNum");
+                    World worldTo =  DimensionManager.getWorld(dimNum);
+
                     Block block1 = world.getBlock(xCoord, yCoord, zCoord);
                     Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
 
                     if (yCoord > 0) {
                         if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
-                            if ((!(block1 instanceof BlockStaticLiquid) && !(block2 instanceof BlockStaticLiquid))) {
+                            if (worldTo.equals(world)) {
+                                player.worldObj = worldTo;
                                 player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                            } else {
+                                TeleportHelper.teleportPlayerToDim(world, dimNum, xCoord + .5, yCoord, zCoord + .5, player);
                             }
                         }
                     }
