@@ -17,7 +17,7 @@ import java.util.Iterator;
 
 public class TeleportHelper
 {
-    // Stolen from Blood Magic
+    // Adapted from Blood Magic
     // @source https://github.com/WayofTime/BloodMagic/blob/277cd0742e1e19eae3ffc9a7a56e789a4a8826a6/src/main/java/WayofTime/alchemicalWizardry/common/spell/complex/effect/SpellHelper.java
     public static Entity teleportPlayerToDim(World oldWorld, int newWorldID, double d, double e, double f, Entity entity) {
         if (entity != null) {
