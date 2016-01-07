@@ -12,5 +12,6 @@ public class ShapelessRecipes
     {
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.teleIngot, 9), new ItemStack(ModBlocks.teleIngotBlock));
         GameRegistry.addShapelessRecipe(new ItemStack(Blocks.end_stone, 9), new ItemStack(ModBlocks.compressedEndStone));
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.obsidianChunk, 9), new ItemStack(Blocks.obsidian));
     }
 }

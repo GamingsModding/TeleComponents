@@ -17,9 +17,8 @@ public class ShapedRecipes
                 'e', new ItemStack(Items.ender_eye),
                 'd', new ItemStack(Items.diamond),
                 'g', new ItemStack(Items.gold_ingot));
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.teleIngotBlock), "###", "###", "###", '#', new ItemStack(ModItems.teleIngot));
-        GameRegistry.addRecipe(new ItemStack(ModTools.toolTelePickaxe), "###", " s ", " s ",
-                '#', new ItemStack(ModItems.teleIngot),
+        GameRegistry.addRecipe(new ItemStack(ModTools.toolTelePickaxe), "iii", " s ", " s ",
+                'i', new ItemStack(ModItems.teleIngot),
                 's', new ItemStack(ModItems.enderStick));
         GameRegistry.addRecipe(new ItemStack(ModTools.toolTeleSword), "i", "i", "s",
                 'i', new ItemStack(ModItems.teleIngot),
@@ -34,8 +33,7 @@ public class ShapedRecipes
                 'i', new ItemStack(ModItems.teleIngot),
                 's', new ItemStack(ModItems.enderStick));
 
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.compressedEndStone), "###", "###", "###", '#', new ItemStack(Blocks.end_stone));
-        GameRegistry.addRecipe(new ItemStack(ModItems.enderStick), "#  ", "#  ", '#', new ItemStack(Items.ender_pearl));
+        GameRegistry.addRecipe(new ItemStack(ModItems.enderStick), "#", "#", '#', new ItemStack(Items.ender_pearl));
         GameRegistry.addRecipe(new ItemStack(ModItems.epCreationCore), "###", "#a#", "###",
                 '#', new ItemStack(Items.ender_pearl),
                 'a', new ItemStack(ModBlocks.compressedEndStone));
