@@ -3,11 +3,13 @@ package com.gamingsmod.telecomponents.common;
 import com.gamingsmod.telecomponents.common.handler.ConfigurationHandler;
 import com.gamingsmod.telecomponents.common.init.*;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
+import com.gamingsmod.telecomponents.common.override.BlockOverride;
 import com.gamingsmod.telecomponents.common.utility.LogHelper;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy
 {
@@ -28,6 +30,7 @@ public class CommonProxy
     {
         Recipes.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(TeleComponents.instance, new GuiHandler());
+        MinecraftForge.EVENT_BUS.register(new BlockOverride());
 
         LogHelper.info("Initalization Complete");
     }

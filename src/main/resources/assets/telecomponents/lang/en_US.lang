@@ -8,6 +8,7 @@ item.telecomponents:enderStick.name=Ender Stick
 item.telecomponents:enderPearlCreationCore.name=Ender Pearl Creation Core
 item.telecomponents:telePositionPointer.name=Teleport Position Pointer
 item.telecomponents:portTeleportDevice.name=Portable Teleport Device
+item.telecomponents:obsidianChunk.name=Obsidian Chunk
 
 #Tool Localization
 item.telecomponents:teleIngotPickaxe.name=TeleIngot Pickaxe

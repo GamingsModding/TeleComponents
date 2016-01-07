@@ -13,6 +13,7 @@ public final class ModItems
     public static final ItemTeleC epCreationCore = new ItemEPCreationCore();
     public static final ItemTeleC telePos = new ItemTelePos();
     public static final ItemTeleC portTeleport = new ItemPortTeleport();
+    public static final ItemTeleC obsidianChunk = new ItemObsidianChunk();
 
     public static void init()
     {
@@ -22,5 +23,6 @@ public final class ModItems
         GameRegistry.registerItem(epCreationCore, "enderPearlCreationCore");
         GameRegistry.registerItem(telePos, "telePositionPointer");
         GameRegistry.registerItem(portTeleport, "portTeleportDevice");
+        GameRegistry.registerItem(obsidianChunk, "obsidianChunk");
     }
 }
