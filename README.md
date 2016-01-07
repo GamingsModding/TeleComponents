@@ -15,4 +15,4 @@ This is a mod that aims to make trolling your friends easier by adding a block t
 
 
 ### Legal Stuff
-1. We can not be held liable for any problems which damages due to our code.
+1. We can not be held liable for any problems which damages your computer due to our code.
