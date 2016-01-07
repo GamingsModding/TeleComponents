@@ -55,6 +55,8 @@ public class ItemPortTeleport extends ItemTeleC {
 
                     player.addChatComponentMessage(new ChatComponentText("Teleport failed").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                 }
+            } else {
+                player.addChatComponentMessage(new ChatComponentText("Teleport failed: Cooldown in progress, please wait " + TimeHelper.ticksToSeconds(stack.getItemDamage()) + " second(s)"));
             }
         }
         return stack;
