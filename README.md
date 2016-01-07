@@ -7,7 +7,7 @@
 ## And a nicely sized thank you to:
 1. HardcoreGamingMC for providing all the textures for the items and blocks and testing the mod.
 2. GullWolf for testing the mod.
-3. CamGaming69 for motivation through minor violence. (Checking java files. Because java).
+3. CamGaming69 for motivation through his 'charm'. (Checking java files. Because java).
 
 ### About
 
