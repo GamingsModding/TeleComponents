@@ -1,6 +1,7 @@
 package com.gamingsmod.telecomponents.common.item;
 
-import com.gamingsmod.telecomponents.common.handler.TeleportHelper;
+import com.gamingsmod.telecomponents.common.helper.TeleportHelper;
+import com.gamingsmod.telecomponents.common.helper.TimeHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
@@ -13,8 +14,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class ItemPortTeleport extends ItemTeleC {
@@ -45,15 +44,10 @@ public class ItemPortTeleport extends ItemTeleC {
                                 player.worldObj = worldTo;
                                 player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
                             } else {
-                                if (player.timeUntilPortal > 0) {
-                                    double timeLeft = player.timeUntilPortal / 10;
-                                    DecimalFormat df = new DecimalFormat("#");
-                                    df.setRoundingMode(RoundingMode.CEILING);
-
-                                    player.addChatComponentMessage(new ChatComponentText("Teleport failed: Please wait " + df.format(timeLeft) + " second(s) to teleport").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-                                } else {
+                                if (player.timeUntilPortal > 0)
+                                    player.addChatComponentMessage(new ChatComponentText("Teleport failed: Please wait " + TimeHelper.ticksToSeconds(player.timeUntilPortal) + " second(s) to teleport").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                                else
                                     TeleportHelper.teleportPlayerToDim(world, dimNum, xCoord + .5, yCoord, zCoord + .5, player);
-                                }
                             }
                             return stack;
                         }

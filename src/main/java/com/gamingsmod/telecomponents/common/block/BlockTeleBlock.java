@@ -1,7 +1,7 @@
 package com.gamingsmod.telecomponents.common.block;
 
 import com.gamingsmod.telecomponents.common.TeleComponents;
-import com.gamingsmod.telecomponents.common.handler.TeleportHelper;
+import com.gamingsmod.telecomponents.common.helper.TeleportHelper;
 import com.gamingsmod.telecomponents.common.item.ItemPortTeleport;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;

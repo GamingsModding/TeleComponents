@@ -1,4 +1,4 @@
-package com.gamingsmod.telecomponents.common.handler;
+package com.gamingsmod.telecomponents.common.helper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
