@@ -34,7 +34,7 @@ switch (array_shift($argv)) {
 				fwrite($file, "  \"display\": {\n");
 				fwrite($file, "    \"thirdperson\": {\n");
 				fwrite($file, "      \"rotation\": [ 10, -45, 170 ],\n");
-				fwrite($file, "	     \"translation\": [ 0, 1.5, -2.75 ],\n");
+				fwrite($file, "      \"translation\": [ 0, 1.5, -2.75 ],\n");
 				fwrite($file, "      \"scale\": [ 0.375, 0.375, 0.375 ]\n");
 				fwrite($file, "    }\n");
 				fwrite($file, "  }\n");
@@ -50,7 +50,7 @@ switch (array_shift($argv)) {
 			if (!file_exists($base . "models/item/{$arg}.json")) {
 				$file = fopen($base . "models/item/{$arg}.json", "w");
 				fwrite($file, "{\n");
-				fwrite($file, "  \"parent\":\"tutorial:item/standard_item\",\n");
+				fwrite($file, "  \"parent\":\"{$mod_id}:item/standard_item\",\n");
 				fwrite($file, "  \"textures\": {\n");
 				fwrite($file, "    \"layer0\":\"{$mod_id}:items/{$arg}\"\n");
 				fwrite($file, "  }\n");

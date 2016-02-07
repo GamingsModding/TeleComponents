@@ -3,6 +3,7 @@ package com.gamingsmod.telecomponents.client.render;
 import com.gamingsmod.telecomponents.common.block.BlockCompressedEndStone;
 import com.gamingsmod.telecomponents.common.block.BlockTeleBlock;
 import com.gamingsmod.telecomponents.common.block.BlockTeleIngot;
+import com.gamingsmod.telecomponents.common.init.ModBlocks;
 import com.gamingsmod.telecomponents.common.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -13,9 +14,9 @@ public class BlockRenderRegister
 {
     public static void init()
     {
-        register(new BlockCompressedEndStone());
-        register(new BlockTeleBlock());
-        register(new BlockTeleIngot());
+        register(ModBlocks.compressedEndStone);
+        register(ModBlocks.teleIngotBlock);
+        register(ModBlocks.teleBlock);
 
     }
 

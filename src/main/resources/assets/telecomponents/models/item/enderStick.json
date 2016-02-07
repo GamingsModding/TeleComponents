@@ -1,6 +1,6 @@
 {
-  "parent":"tutorial:item/standard_item",
+  "parent":"telecomponents:item/standard_item",
   "textures": {
-    "layer0":"tutorial:items/enderStick"
+    "layer0":"telecomponents:items/enderStick"
   }
 }
