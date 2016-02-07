@@ -1,23 +1,18 @@
 package com.gamingsmod.telecomponents.common.item;
 
 import com.gamingsmod.telecomponents.common.handler.ConfigurationHandler;
-import com.gamingsmod.telecomponents.common.reference.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class ItemEPGun extends ItemTeleC
 {
-    private static final String[] ICONS = {"enderPearlGun_3", "enderPearlGun_2", "enderPearlGun_1", "enderPearlGun"};
+//    private static final String[] ICONS = {"enderPearlGun_3", "enderPearlGun_2", "enderPearlGun_1", "enderPearlGun"};
 
-    @SideOnly(Side.CLIENT)
-    private IIcon[] icons;
+//    @SideOnly(Side.CLIENT)
+//    private IIcon[] icons;
 
     public ItemEPGun()
     {
@@ -53,38 +48,5 @@ public class ItemEPGun extends ItemTeleC
                 world.playSoundAtEntity(entity, "random.levelup", 1, 1);
         }
 
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses()
-    {
-        return true;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
-        icons = new IIcon[ICONS.length];
-
-        for (int i = 0; i < ICONS.length; i++)
-        {
-            icons[i] = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + ICONS[i]);
-        }
-    }
-
-    @Override
-    public IIcon getIcon(ItemStack stack, int renderpass)
-    {
-        int cooldown = stack.getItemDamage();
-        if (cooldown >= (stack.getMaxDamage() / 4 * 3))
-            return icons[0];
-        else if (cooldown >= (stack.getMaxDamage() / 4 * 2))
-            return icons[1];
-        else if (cooldown >= (stack.getMaxDamage() / 4))
-            return icons[2];
-        else
-            return icons[3];
     }
 }

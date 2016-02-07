@@ -3,9 +3,7 @@ package com.gamingsmod.telecomponents.common.item;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -20,14 +18,14 @@ public class ItemTelePos extends ItemTeleC
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int face, float flt1, float flt2, float flt3)
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        NBTHelper.setInteger(itemStack, "xCoord", x);
-        NBTHelper.setInteger(itemStack, "yCoord", y + 1);
-        NBTHelper.setInteger(itemStack, "zCoord", z);
-        NBTHelper.setInteger(itemStack, "dimNum", world.provider.dimensionId);
+        NBTHelper.setInteger(itemStack, "xCoord", pos.getX());
+        NBTHelper.setInteger(itemStack, "yCoord", pos.getY() + 1);
+        NBTHelper.setInteger(itemStack, "zCoord", pos.getZ());
+        NBTHelper.setInteger(itemStack, "dimNum", player.dimension);
 
-        player.addChatComponentMessage(new ChatComponentText("Coordinates set to: X: " + x + ", Y: " + (y + 1) + ", Z: " + z).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.LIGHT_PURPLE)));
+        player.addChatComponentMessage(new ChatComponentText("Coordinates set to: X: " + pos.getX() + ", Y: " + (pos.getY() + 1) + ", Z: " + pos.getZ()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.LIGHT_PURPLE)));
         this.onItemRightClick(itemStack, world, player);
         return true;
     }

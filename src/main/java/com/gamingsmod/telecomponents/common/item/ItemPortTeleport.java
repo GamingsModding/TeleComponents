@@ -8,6 +8,7 @@ import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
@@ -33,8 +34,8 @@ public class ItemPortTeleport extends ItemTeleC {
                 int zCoord = NBTHelper.getInt(stack, "zCoord");
                 int dimNum = NBTHelper.getInt(stack, "dimNum");
                 World worldTo = DimensionManager.getWorld(dimNum);
-                Block block1 = worldTo.getBlock(xCoord, yCoord, zCoord);
-                Block block2 = worldTo.getBlock(xCoord, yCoord + 1, zCoord);
+                Block block1 = worldTo.getBlockState(new BlockPos(xCoord, yCoord, zCoord)).getBlock();
+                Block block2 = worldTo.getBlockState(new BlockPos(xCoord, yCoord + 1, zCoord)).getBlock();
                 stack.damageItem(499, player);
 
                 if (yCoord > 0) {
@@ -47,7 +48,7 @@ public class ItemPortTeleport extends ItemTeleC {
                                 if (player.timeUntilPortal > 0)
                                     player.addChatComponentMessage(new ChatComponentText("Teleport failed: Please wait " + TimeHelper.ticksToSeconds(player.timeUntilPortal) + " second(s) to teleport").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                                 else
-                                    TeleportHelper.teleportPlayerToDim(world, dimNum, xCoord + .5, yCoord, zCoord + .5, player);
+                                    TeleportHelper.teleportEntityToDim(world, dimNum, xCoord, yCoord, zCoord, player);
                             }
                             return stack;
                         }
@@ -56,7 +57,7 @@ public class ItemPortTeleport extends ItemTeleC {
                     player.addChatComponentMessage(new ChatComponentText("Teleport failed").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                 }
             } else {
-                player.addChatComponentMessage(new ChatComponentText("Teleport failed: Cooldown in progress, please wait " + TimeHelper.ticksToSeconds(stack.getItemDamage()) + " second(s)"));
+                player.addChatComponentMessage(new ChatComponentText("Teleport failed: Cooldown in progress, please wait " + TimeHelper.ticksToSeconds(stack.getItemDamage()) + " second(s)").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             }
         }
         return stack;

@@ -2,9 +2,9 @@ package com.gamingsmod.telecomponents.common.recipes;
 
 import com.gamingsmod.telecomponents.common.init.ModBlocks;
 import com.gamingsmod.telecomponents.common.init.ModItems;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ShapelessRecipes
 {

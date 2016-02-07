@@ -5,7 +5,6 @@ public class BlockTeleIngot extends BlockTeleC
     public BlockTeleIngot()
     {
         super();
-        this.setBlockName("teleIngotBlock");
-        this.setBlockTextureName("teleIngotBlock");
+        this.setUnlocalizedName("teleIngotBlock");
     }
 }

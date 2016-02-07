@@ -13,6 +13,6 @@ public class Material
 
     public static final class Armor
     {
-        public static final ItemArmor.ArmorMaterial TELEINGOT = EnumHelper.addArmorMaterial("teleingot", 40, new int[]{4, 9, 7, 4}, 30);
+        public static final ItemArmor.ArmorMaterial TELEINGOT = EnumHelper.addArmorMaterial("teleingot", Reference.MOD_ID + ":teleingot", 40, new int[]{4, 9, 7, 4}, 30);
     }
 }

@@ -7,7 +7,6 @@ public class BlockCompressedEndStone extends BlockTeleC
     public BlockCompressedEndStone()
     {
         super(Material.rock);
-        this.setBlockName("compressedEndStone");
-        this.setBlockTextureName("compressedEndStone");
+        this.setUnlocalizedName("compressedEndStone");
     }
 }

@@ -7,23 +7,23 @@ import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-
-import java.util.Random;
 
 public class BlockTeleBlock extends BlockContainerTeleC
 {
     public BlockTeleBlock() {
         super();
-        this.setBlockTextureName("teleBlock");
-        this.setBlockName("teleBlock");
+        this.setUnlocalizedName("teleBlock");
     }
 
     @Override
@@ -32,20 +32,20 @@ public class BlockTeleBlock extends BlockContainerTeleC
     }
 
     @Override
-    public boolean onBlockActivated(World world, int blockx, int blocky, int blockz, EntityPlayer player, int face, float flt1, float flt2, float flt3)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (!world.isRemote) {
             ItemStack playerItem = player.getCurrentEquippedItem();
 
             if (playerItem != null) {
                 if (playerItem.getItem() instanceof ItemPortTeleport) {
-                    NBTHelper.setInteger(playerItem, "xCoord", blockx);
-                    NBTHelper.setInteger(playerItem, "yCoord", blocky + 1);
-                    NBTHelper.setInteger(playerItem, "zCoord", blockz);
+                    NBTHelper.setInteger(playerItem, "xCoord", pos.getX());
+                    NBTHelper.setInteger(playerItem, "yCoord", pos.getY() + 1);
+                    NBTHelper.setInteger(playerItem, "zCoord", pos.getZ());
                     return true;
                 }
             }
-            player.openGui(TeleComponents.instance, GuiHandler.MOD_TELE_BLOCK_ID, world, blockx, blocky, blockz);
+            player.openGui(TeleComponents.instance, GuiHandler.MOD_TELE_BLOCK_ID, world, pos.getY(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -54,65 +54,37 @@ public class BlockTeleBlock extends BlockContainerTeleC
     // in the game
     // @source net.minecraft.block.BlockChest
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
-        TileEntityTeleBlock te = (TileEntityTeleBlock) world.getTileEntity(x, y, z);
-        Random random = new Random();
+        TileEntity tileentity = worldIn.getTileEntity(pos);
 
-        if (te != null) {
-            for (int i1 = 0; i1 < te.getSizeInventory(); ++i1) {
-                ItemStack itemstack = te.getStackInSlot(i1);
-
-                if (itemstack != null) {
-                    float f = random.nextFloat() * 0.8F + 0.1F;
-                    float f1 = random.nextFloat() * 0.8F + 0.1F;
-                    EntityItem entityitem;
-
-                    for (float f2 = random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; world.spawnEntityInWorld(entityitem)) {
-                        int j1 = random.nextInt(21) + 10;
-
-                        if (j1 > itemstack.stackSize) {
-                            j1 = itemstack.stackSize;
-                        }
-
-                        itemstack.stackSize -= j1;
-                        entityitem = new EntityItem(world, (double) ((float) x + f), (double) ((float) y + f1), (double) ((float) z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-                        float f3 = 0.05F;
-                        entityitem.motionX = (double) ((float) random.nextGaussian() * f3);
-                        entityitem.motionY = (double) ((float) random.nextGaussian() * f3 + 0.2F);
-                        entityitem.motionZ = (double) ((float) random.nextGaussian() * f3);
-
-                        if (itemstack.hasTagCompound()) {
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
-                        }
-                    }
-                }
-            }
-
-            world.func_147453_f(x, y, z, block);
+        if (tileentity instanceof IInventory)
+        {
+            InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileentity);
+            worldIn.updateComparatorOutputLevel(pos, this);
         }
 
-        super.breakBlock(world, x, y, z, block, meta);
+        super.breakBlock(worldIn, pos, state);
     }
 
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack stack)
     {
         if (stack.hasDisplayName()) {
-            ((TileEntityTeleBlock) world.getTileEntity(x, y, z)).setCustomName(stack.getDisplayName());
+            ((TileEntityTeleBlock) world.getTileEntity(pos)).setCustomName(stack.getDisplayName());
         }
-        ((TileEntityTeleBlock) world.getTileEntity(x, y, z)).setPlayerName(((EntityPlayer) player).getDisplayName());
+        ((TileEntityTeleBlock) world.getTileEntity(pos)).setPlayerName(((EntityPlayer) player).getDisplayName().getFormattedText());
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        if (!world.isRemote && world.isBlockIndirectlyGettingPowered(x, y, z))
+        if (!world.isRemote && world.isBlockIndirectlyGettingPowered(pos) > 0)
         {
-            EntityPlayer player = world.getClosestPlayer(x, y, z, 5);
+            EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getX(), pos.getX(), 5);
             if (player != null) {
-                TileEntityTeleBlock te = (TileEntityTeleBlock) world.getTileEntity(x, y, z);
+                TileEntityTeleBlock te = (TileEntityTeleBlock) world.getTileEntity(pos);
                 ItemStack item = te.getStackInSlot(0);
                 if (item != null) {
                     int xCoord = NBTHelper.getInt(item, "xCoord");
@@ -121,8 +93,8 @@ public class BlockTeleBlock extends BlockContainerTeleC
                     int dimNum = NBTHelper.getInt(item, "dimNum");
                     World worldTo =  DimensionManager.getWorld(dimNum);
 
-                    Block block1 = world.getBlock(xCoord, yCoord, zCoord);
-                    Block block2 = world.getBlock(xCoord, yCoord + 1, zCoord);
+                    Block block1 = world.getBlockState(new BlockPos(xCoord, yCoord, zCoord)).getBlock();
+                    Block block2 = world.getBlockState(new BlockPos(xCoord, yCoord + 1, zCoord)).getBlock();
 
                     if (yCoord > 0) {
                         if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
@@ -130,7 +102,7 @@ public class BlockTeleBlock extends BlockContainerTeleC
                                 player.worldObj = worldTo;
                                 player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
                             } else {
-                                TeleportHelper.teleportPlayerToDim(world, dimNum, xCoord + .5, yCoord, zCoord + .5, player);
+                                TeleportHelper.teleportEntityToDim(world, dimNum, xCoord + .5, yCoord, zCoord + .5, player);
                             }
                         }
                     }

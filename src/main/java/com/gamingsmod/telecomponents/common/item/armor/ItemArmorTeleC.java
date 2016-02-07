@@ -4,9 +4,6 @@ import com.gamingsmod.telecomponents.common.creativetab.CreativeTabTeleC;
 import com.gamingsmod.telecomponents.common.init.ModArmor;
 import com.gamingsmod.telecomponents.common.reference.ArmorType;
 import com.gamingsmod.telecomponents.common.reference.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -38,19 +35,19 @@ public class ItemArmorTeleC extends ItemArmor {
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         if (itemStack.getItem().equals(ModArmor.teleIngotHelmet)) {
             if (!player.isPotionActive(Potion.nightVision) || player.getActivePotionEffect(Potion.nightVision).getDuration() < 210) {
-                player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0, true));
+                player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0, true, false));
             }
         }
 
         if (itemStack.getItem().equals(ModArmor.teleIngotLegs)) {
             if (!player.isPotionActive(Potion.moveSpeed) || player.getActivePotionEffect(Potion.moveSpeed).getDuration() < 210) {
-                player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 300, 1, true));
+                player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 300, 1, true, false));
             }
         }
 
         if (itemStack.getItem().equals(ModArmor.teleIngotBoots)) {
             if (!player.isPotionActive(Potion.jump) || player.getActivePotionEffect(Potion.jump).getDuration() < 210) {
-                player.addPotionEffect(new PotionEffect(Potion.jump.id, 300, 1, true));
+                player.addPotionEffect(new PotionEffect(Potion.jump.id, 300, 1, true, false));
             }
         }
 
@@ -58,7 +55,7 @@ public class ItemArmorTeleC extends ItemArmor {
                 player.getCurrentArmor(1) != null && player.getCurrentArmor(1).getItem().equals(ModArmor.teleIngotLegs) &&
                 player.getCurrentArmor(2) != null && player.getCurrentArmor(2).getItem().equals(ModArmor.teleIngotChest) &&
                 player.getCurrentArmor(3) != null && player.getCurrentArmor(3).getItem().equals(ModArmor.teleIngotHelmet))
-            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 50, 0, true));
+            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 50, 0, true, false));
     }
 
     @Override
@@ -74,12 +71,6 @@ public class ItemArmorTeleC extends ItemArmor {
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
         return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 
     protected String getUnwrappedUnlocalizedName(String unlocalizedName) {

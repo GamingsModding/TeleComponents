@@ -1,5 +1,6 @@
 package com.gamingsmod.telecomponents.common.tileentity;
 
+import com.gamingsmod.telecomponents.common.init.ModItems;
 import com.gamingsmod.telecomponents.common.item.ItemTelePos;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -18,47 +19,45 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
 {
     private ItemStack[] inventory;
     private String customName;
-    private String playerName;
+    private String placedBy;
 
     public TileEntityTeleBlock() {
         this.inventory = new ItemStack[this.getSizeInventory()];
     }
 
     public String getCustomName() {
-        return customName;
+        return this.customName;
     }
 
     public void setCustomName(String customName) {
         this.customName = customName;
     }
 
-    public String getPlayerName()
-    {
-        return playerName;
+    public void setPlayerName(String name) {
+        this.placedBy = name;
     }
 
-    public void setPlayerName(String playerName)
-    {
-        this.playerName = playerName;
-    }
-
-    @Override
-    public String getInventoryName() {
-        return this.hasCustomInventoryName() ? this.customName : "container.teleBlock";
+    public String getPlayerName() {
+        return this.placedBy;
     }
 
     @Override
-    public boolean hasCustomInventoryName() {
+    public String getName() {
+        return this.hasCustomName() ? this.customName : "container.teleBlock";
+    }
+
+    @Override
+    public boolean hasCustomName() {
         return this.customName != null && !this.customName.equals("");
     }
 
+    @Override
     public IChatComponent getDisplayName() {
-        return this.hasCustomInventoryName() ? new ChatComponentText(this.getInventoryName()) : new ChatComponentTranslation(this.getInventoryName());
+        return this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName());
     }
 
     @Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return 1;
     }
 
@@ -98,7 +97,7 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int index) {
+    public ItemStack removeStackFromSlot(int index) {
         ItemStack stack = this.getStackInSlot(index);
         this.setInventorySlotContents(index, null);
         return stack;
@@ -126,35 +125,37 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
-                && player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5) <= 64.0D;
+        return this.worldObj.getTileEntity(this.getPos()) == this && player.getDistanceSq(this.pos.add(0.5, 0.5, 0.5)) <= 64;
     }
 
     @Override
-    public void openInventory() {
+    public void openInventory(EntityPlayer player) {
     }
 
     @Override
-    public void closeInventory() {
+    public void closeInventory(EntityPlayer player) {
     }
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return stack.getItem() instanceof ItemTelePos;
+        return stack.getItem().equals(ModItems.telePos);
     }
 
+    @Override
     public int getField(int id) {
         return 0;
     }
 
+    @Override
     public void setField(int id, int value) {
     }
 
+    @Override
     public int getFieldCount() {
         return 0;
     }
 
-//    @Override
+    @Override
     public void clear() {
         for (int i = 0; i < this.getSizeInventory(); i++)
             this.setInventorySlotContents(i, null);
@@ -175,10 +176,9 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
         }
         nbt.setTag("Items", list);
 
-        if (this.hasCustomInventoryName()) {
+        if (this.hasCustomName()) {
             nbt.setString("CustomName", this.getCustomName());
         }
-        nbt.setString("PlayerName", this.getPlayerName());
     }
 
 
@@ -196,7 +196,5 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory
         if (nbt.hasKey("CustomName", 8)) {
             this.setCustomName(nbt.getString("CustomName"));
         }
-        this.setPlayerName(nbt.getString("PlayerName"));
     }
-
 }
