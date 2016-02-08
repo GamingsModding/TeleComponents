@@ -1,0 +1,6 @@
+{
+  "parent":"telecomponents:item/standard_item",
+  "textures": {
+    "layer0":"telecomponents:items/teleIngotBoots"
+  }
+}

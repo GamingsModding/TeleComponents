@@ -1,6 +1,8 @@
 package com.gamingsmod.telecomponents.common.item;
 
 import com.gamingsmod.telecomponents.common.handler.ConfigurationHandler;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
