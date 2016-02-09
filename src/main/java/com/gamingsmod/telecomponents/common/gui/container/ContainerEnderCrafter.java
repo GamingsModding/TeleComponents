@@ -1,22 +1,19 @@
 package com.gamingsmod.telecomponents.common.gui.container;
 
-import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafting;
+import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafter;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemEnderPearl;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
-public class ContainerEnderCrafting extends Container
+public class ContainerEnderCrafter extends Container
 {
-    private TileEntityEnderCrafting te;
+    private TileEntityEnderCrafter te;
 
 
-    public ContainerEnderCrafting(IInventory player, TileEntityEnderCrafting tileEntity)
+    public ContainerEnderCrafter(IInventory player, TileEntityEnderCrafter tileEntity)
     {
         /**
          * Tile Entity TeleBlock    Number of Slots: 10      Slot IDs: 0-9
@@ -46,6 +43,37 @@ public class ContainerEnderCrafting extends Container
         for (int x = 0; x < 9; ++x) {
             this.addSlotToContainer((new Slot(player, x, 8 + x * 18, 142)));
         }
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int fromSlot) {
+        ItemStack previous = null;
+        Slot slot = (Slot) this.inventorySlots.get(fromSlot);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack current = slot.getStack();
+            previous = current.copy();
+
+            if (fromSlot < 9) {
+                // From TE Inventory to Player Inventory
+                if (!this.mergeItemStack(current, 9, 45, true))
+                    return null;
+            } else {
+                // From Player Inventory to TE Inventory
+                if (!this.mergeItemStack(current, 0, 9, false))
+                    return null;
+            }
+
+            if (current.stackSize == 0)
+                slot.putStack((ItemStack) null);
+            else
+                slot.onSlotChanged();
+
+            if (current.stackSize == previous.stackSize)
+                return null;
+            slot.onPickupFromSlot(playerIn, current);
+        }
+        return previous;
     }
 
     @Override

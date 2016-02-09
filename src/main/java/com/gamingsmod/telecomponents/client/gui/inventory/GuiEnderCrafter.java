@@ -1,21 +1,19 @@
 package com.gamingsmod.telecomponents.client.gui.inventory;
 
-import com.gamingsmod.telecomponents.common.gui.container.ContainerEnderCrafting;
-import com.gamingsmod.telecomponents.common.gui.container.ContainerTeleBlock;
-import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafting;
-import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
+import com.gamingsmod.telecomponents.common.gui.container.ContainerEnderCrafter;
+import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafter;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiEnderCrafting extends GuiContainer
+public class GuiEnderCrafter extends GuiContainer
 {
     private IInventory playerInv;
-    private TileEntityEnderCrafting te;
+    private TileEntityEnderCrafter te;
 
-    public GuiEnderCrafting(IInventory player, TileEntityEnderCrafting te)
+    public GuiEnderCrafter(IInventory player, TileEntityEnderCrafter te)
     {
-        super(new ContainerEnderCrafting(player, te));
+        super(new ContainerEnderCrafter(player, te));
 
         this.playerInv = player;
         this.te = te;
@@ -26,7 +24,7 @@ public class GuiEnderCrafting extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
-        this.mc.getTextureManager().bindTexture(new ResourceLocation("telecomponents:textures/gui/enderCrafting.png"));
+        this.mc.getTextureManager().bindTexture(new ResourceLocation("telecomponents:textures/gui/enderCrafter.png"));
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
     }
 

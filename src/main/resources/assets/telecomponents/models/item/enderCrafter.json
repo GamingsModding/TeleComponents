@@ -1,5 +1,5 @@
 {
-  "parent":"telecomponents:block/enderCrafting",
+  "parent":"telecomponents:block/enderCrafter",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

@@ -1,6 +1,5 @@
 package com.gamingsmod.telecomponents.common.item;
 
-import com.gamingsmod.telecomponents.common.handler.ConfigurationHandler;
 import com.gamingsmod.telecomponents.common.init.ModItems;
 import com.gamingsmod.telecomponents.common.reference.Reference;
 import net.minecraft.client.resources.model.ModelBakery;

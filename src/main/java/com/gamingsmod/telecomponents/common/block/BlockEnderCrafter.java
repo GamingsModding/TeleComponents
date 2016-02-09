@@ -2,7 +2,7 @@ package com.gamingsmod.telecomponents.common.block;
 
 import com.gamingsmod.telecomponents.common.TeleComponents;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
-import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafting;
+import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +21,7 @@ public class BlockEnderCrafter extends BlockContainerTeleC
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-        return new TileEntityEnderCrafting();
+        return new TileEntityEnderCrafter();
     }
 
     @Override

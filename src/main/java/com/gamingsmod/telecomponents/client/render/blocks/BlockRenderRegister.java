@@ -14,7 +14,7 @@ public class BlockRenderRegister
         register(ModBlocks.teleIngotBlock);
         register(ModBlocks.teleBlock);
         register(ModBlocks.compressedEndStone);
-        register(ModBlocks.enderCrafting);
+        register(ModBlocks.enderCrafter);
     }
 
     private static void register(Block block)

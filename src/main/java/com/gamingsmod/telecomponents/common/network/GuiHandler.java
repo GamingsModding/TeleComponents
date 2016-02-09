@@ -1,10 +1,10 @@
 package com.gamingsmod.telecomponents.common.network;
 
-import com.gamingsmod.telecomponents.client.gui.inventory.GuiEnderCrafting;
+import com.gamingsmod.telecomponents.client.gui.inventory.GuiEnderCrafter;
 import com.gamingsmod.telecomponents.client.gui.inventory.GuiTeleBlock;
-import com.gamingsmod.telecomponents.common.gui.container.ContainerEnderCrafting;
+import com.gamingsmod.telecomponents.common.gui.container.ContainerEnderCrafter;
 import com.gamingsmod.telecomponents.common.gui.container.ContainerTeleBlock;
-import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafting;
+import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafter;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
@@ -22,7 +22,7 @@ public class GuiHandler implements IGuiHandler
             case MOD_TELE_BLOCK_ID:
                 return new ContainerTeleBlock(player.inventory, (TileEntityTeleBlock) world.getTileEntity(new BlockPos(x, y, z)));
             case MOD_ENDER_CRAFTING_ID:
-                return new ContainerEnderCrafting(player.inventory, (TileEntityEnderCrafting) world.getTileEntity(new BlockPos(x, y, z)));
+                return new ContainerEnderCrafter(player.inventory, (TileEntityEnderCrafter) world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }
@@ -33,7 +33,7 @@ public class GuiHandler implements IGuiHandler
             case MOD_TELE_BLOCK_ID:
                 return new GuiTeleBlock(player.inventory, (TileEntityTeleBlock) world.getTileEntity(new BlockPos(x, y, z)));
             case MOD_ENDER_CRAFTING_ID:
-                return new GuiEnderCrafting(player.inventory, (TileEntityEnderCrafting) world.getTileEntity(new BlockPos(x, y, z)));
+                return new GuiEnderCrafter(player.inventory, (TileEntityEnderCrafter) world.getTileEntity(new BlockPos(x, y, z)));
 
         }
         return null;

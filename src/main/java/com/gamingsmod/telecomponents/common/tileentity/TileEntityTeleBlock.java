@@ -1,7 +1,6 @@
 package com.gamingsmod.telecomponents.common.tileentity;
 
 import com.gamingsmod.telecomponents.common.helper.TeleportHelper;
-import com.gamingsmod.telecomponents.common.init.ModItems;
 import com.gamingsmod.telecomponents.common.item.ItemTelePos;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;

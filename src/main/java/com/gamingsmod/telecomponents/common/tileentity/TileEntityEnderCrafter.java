@@ -11,12 +11,12 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 
-public class TileEntityEnderCrafting extends TileEntity implements IInventory
+public class TileEntityEnderCrafter extends TileEntity implements IInventory
 {
     private ItemStack[] inventory;
     private String customName;
 
-    public TileEntityEnderCrafting() {
+    public TileEntityEnderCrafter() {
         this.inventory = new ItemStack[this.getSizeInventory()];
     }
 
@@ -35,7 +35,7 @@ public class TileEntityEnderCrafting extends TileEntity implements IInventory
 
     @Override
     public String getName() {
-        return this.hasCustomName() ? this.customName : "container.enderCrafting";
+        return this.hasCustomName() ? this.customName : "container.enderCrafter";
     }
 
     @Override
@@ -132,7 +132,7 @@ public class TileEntityEnderCrafting extends TileEntity implements IInventory
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return index != 9 || (stack.getItem() instanceof ItemEnderPearl);
+        return index == 9 && (stack.getItem() instanceof ItemEnderPearl);
 
     }
 

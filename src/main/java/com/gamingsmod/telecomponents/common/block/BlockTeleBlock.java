@@ -1,12 +1,10 @@
 package com.gamingsmod.telecomponents.common.block;
 
 import com.gamingsmod.telecomponents.common.TeleComponents;
-import com.gamingsmod.telecomponents.common.helper.TeleportHelper;
 import com.gamingsmod.telecomponents.common.item.ItemPortTeleport;
 import com.gamingsmod.telecomponents.common.network.GuiHandler;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityTeleBlock;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 
 public class BlockTeleBlock extends BlockContainerTeleC
 {
