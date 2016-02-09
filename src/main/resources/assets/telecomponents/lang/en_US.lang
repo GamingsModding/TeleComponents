@@ -27,6 +27,8 @@ item.telecomponents:teleIngotBoots.name=TeleIngot Boots
 tile.telecomponents:teleIngotBlock.name=TeleIngot Block
 tile.telecomponents:teleBlock.name=TeleBlock
 tile.telecomponents:compressedEndStone.name=Compressed End Stone
+tile.telecomponents:enderCrafter.name=Ender Crafter
 
 #Container
 container.teleBlock=TeleBlock
+container.enderCrafter=Ender Crafter

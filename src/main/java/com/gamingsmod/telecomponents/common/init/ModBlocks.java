@@ -9,14 +9,14 @@ public final class ModBlocks
 {
     public static final BlockTeleC teleIngotBlock = new BlockTeleIngot();
     public static final BlockContainerTeleC teleBlock = new BlockTeleBlock();
-    public static final BlockContainerTeleC enderCrafting = new BlockEnderCrafting();
+    public static final BlockContainerTeleC enderCrafter = new BlockEnderCrafter();
     public static final BlockTeleC compressedEndStone = new BlockCompressedEndStone();
 
     public static void init()
     {
         GameRegistry.registerBlock(teleIngotBlock, "teleIngotBlock");
         GameRegistry.registerBlock(teleBlock, "teleBlock");
-        GameRegistry.registerBlock(enderCrafting, "enderCrafting");
+        GameRegistry.registerBlock(enderCrafter, "enderCrafter");
         GameRegistry.registerBlock(compressedEndStone, "compressedEndStone");
     }
 }
