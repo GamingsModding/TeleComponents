@@ -44,6 +44,7 @@ public class ItemPortTeleport extends ItemTeleC {
                             if (worldTo.equals(world)) {
                                 player.worldObj = worldTo;
                                 player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
+                                world.playSoundEffect(xCoord, yCoord, zCoord, "mob.endermen.portal", 1.0F, 1.0F);
                             } else {
                                 if (player.timeUntilPortal > 0)
                                     player.addChatComponentMessage(new ChatComponentText("Teleport failed: Please wait " + TimeHelper.ticksToSeconds(player.timeUntilPortal) + " second(s) to teleport").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));

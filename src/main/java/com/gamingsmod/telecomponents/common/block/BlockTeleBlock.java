@@ -45,7 +45,7 @@ public class BlockTeleBlock extends BlockContainerTeleC
                     return true;
                 }
             }
-            player.openGui(TeleComponents.instance, GuiHandler.MOD_TELE_BLOCK_ID, world, pos.getY(), pos.getY(), pos.getZ());
+            player.openGui(TeleComponents.instance, GuiHandler.MOD_TELE_BLOCK_ID, world, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -78,36 +78,8 @@ public class BlockTeleBlock extends BlockContainerTeleC
     }
 
     @Override
-    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
+    public int getRenderType()
     {
-        if (!world.isRemote && world.isBlockIndirectlyGettingPowered(pos) > 0)
-        {
-            EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getX(), pos.getX(), 5);
-            if (player != null) {
-                TileEntityTeleBlock te = (TileEntityTeleBlock) world.getTileEntity(pos);
-                ItemStack item = te.getStackInSlot(0);
-                if (item != null) {
-                    int xCoord = NBTHelper.getInt(item, "xCoord");
-                    int yCoord = NBTHelper.getInt(item, "yCoord");
-                    int zCoord = NBTHelper.getInt(item, "zCoord");
-                    int dimNum = NBTHelper.getInt(item, "dimNum");
-                    World worldTo =  DimensionManager.getWorld(dimNum);
-
-                    Block block1 = world.getBlockState(new BlockPos(xCoord, yCoord, zCoord)).getBlock();
-                    Block block2 = world.getBlockState(new BlockPos(xCoord, yCoord + 1, zCoord)).getBlock();
-
-                    if (yCoord > 0) {
-                        if (!block1.isOpaqueCube() && !block2.isOpaqueCube()) {
-                            if (worldTo.equals(world)) {
-                                player.worldObj = worldTo;
-                                player.setPositionAndUpdate(xCoord + .5, yCoord, zCoord + .5);
-                            } else {
-                                TeleportHelper.teleportEntityToDim(world, dimNum, xCoord + .5, yCoord, zCoord + .5, player);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        return 3;
     }
 }

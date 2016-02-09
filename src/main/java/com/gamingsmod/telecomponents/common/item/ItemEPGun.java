@@ -1,27 +1,24 @@
 package com.gamingsmod.telecomponents.common.item;
 
 import com.gamingsmod.telecomponents.common.handler.ConfigurationHandler;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import com.gamingsmod.telecomponents.common.init.ModItems;
+import com.gamingsmod.telecomponents.common.reference.Reference;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class ItemEPGun extends ItemTeleC
 {
-//    private static final String[] ICONS = {"enderPearlGun_3", "enderPearlGun_2", "enderPearlGun_1", "enderPearlGun"};
-
-//    @SideOnly(Side.CLIENT)
-//    private IIcon[] icons;
-
     public ItemEPGun()
     {
         super();
         this.setUnlocalizedName("enderPearlGun");
         this.setMaxStackSize(1);
-        this.setMaxDamage(ConfigurationHandler.ENDER_PEARL_GUN_COOLDOWN);
+        this.setMaxDamage(50);
     }
 
     @Override
@@ -35,7 +32,6 @@ public class ItemEPGun extends ItemTeleC
             {
                 world.spawnEntityInWorld(new EntityEnderPearl(world, player));
                 stack.damageItem(49, player);
-                world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
             }
         }
         return stack;
@@ -44,11 +40,16 @@ public class ItemEPGun extends ItemTeleC
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int int1, boolean bool1)
     {
-        if (stack.getItemDamage() < stack.getMaxDamage()) {
+        if (stack.getItemDamage() < stack.getMaxDamage())
             stack.setItemDamage(stack.getItemDamage() - 1);
-            if(stack.getItemDamage() == 0)
-                world.playSoundAtEntity(entity, "random.levelup", 1, 1);
-        }
 
+    }
+
+    public static void registerIcons()
+    {
+        final String[] ICONS = {"enderPearlGun_3", "enderPearlGun_2", "enderPearlGun_1", "enderPearlGun"};
+
+        for (int i = 0; i < ICONS.length; i++)
+            ModelBakery.registerItemVariants(ModItems.enderPearlGun, new ResourceLocation(Reference.MOD_ID.toLowerCase() + ":" + ICONS[i]));
     }
 }
