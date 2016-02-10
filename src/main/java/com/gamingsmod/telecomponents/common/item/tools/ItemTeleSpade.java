@@ -1,34 +1,24 @@
 package com.gamingsmod.telecomponents.common.item.tools;
 
-import com.gamingsmod.telecomponents.common.creativetab.CreativeTabTeleC;
-import com.gamingsmod.telecomponents.common.reference.Reference;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
+import com.gamingsmod.telecomponents.common.reference.Material;
+import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 
-public class ItemTeleSpade extends ItemSpade
+import java.util.Set;
+
+public class ItemTeleSpade extends ItemToolTeleC
 {
-    public ItemTeleSpade(Item.ToolMaterial material)
-    {
-        super(material);
-        this.setUnlocalizedName("teleIngotSpade");
-        this.setCreativeTab(CreativeTabTeleC.TELEC_TAB);
+
+    private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] {Blocks.clay, Blocks.dirt, Blocks.farmland, Blocks.grass, Blocks.gravel, Blocks.mycelium, Blocks.sand, Blocks.snow, Blocks.snow_layer, Blocks.soul_sand});
+
+    public ItemTeleSpade() {
+        super("teleIngotSpace", 1.0F, Material.Tools.TELEINGOT, EFFECTIVE_ON);
     }
 
-    @Override
-    public String getUnlocalizedName()
+    // From ItemSpade
+    public boolean canHarvestBlock(Block blockIn)
     {
-        return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
-        return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+        return blockIn == Blocks.snow_layer ? true : blockIn == Blocks.snow;
     }
 }

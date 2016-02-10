@@ -1,15 +1,16 @@
 package com.gamingsmod.telecomponents.common.item.tools;
 
 import com.gamingsmod.telecomponents.common.creativetab.CreativeTabTeleC;
+import com.gamingsmod.telecomponents.common.reference.Material;
 import com.gamingsmod.telecomponents.common.reference.Reference;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
 public class ItemTeleHoe extends ItemHoe
 {
-    public ItemTeleHoe(ToolMaterial material)
+    public ItemTeleHoe()
     {
-        super(material);
+        super(Material.Tools.TELEINGOT);
         this.setUnlocalizedName("teleIngotHoe");
         this.setCreativeTab(CreativeTabTeleC.TELEC_TAB);
     }

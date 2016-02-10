@@ -1,5 +1,6 @@
 package com.gamingsmod.telecomponents.common.gui.container;
 
+import com.gamingsmod.telecomponents.common.item.ItemTelePos;
 import com.gamingsmod.telecomponents.common.tileentity.TileEntityEnderCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -16,9 +17,11 @@ public class ContainerEnderCrafter extends Container
     public ContainerEnderCrafter(IInventory player, TileEntityEnderCrafter tileEntity)
     {
         /**
-         * Tile Entity TeleBlock    Number of Slots: 10      Slot IDs: 0-9
-         * Player Inventory         Number of Slots: 27     Slot IDs: 9-36
-         * Player Hotbar            Number of Slots: 9      Slot IDs: 36-45
+         * EnderCrafter Crafting Grid   Number of Slots: 9      Slot IDs: 0-8
+         * EnderCrafter Ender Slot      Number of Slots: 1      Slot IDs: 9-9
+         * EnderCrafter Result Slot     Number of Slots: 1      Slot IDs: 10-10
+         * Player Inventory             Number of Slots: 27     Slot IDs: 11-38
+         * Player Hotbar                Number of Slots: 9      Slot IDs: 39-48
          */
 
         this.te = tileEntity;
@@ -30,7 +33,11 @@ public class ContainerEnderCrafter extends Container
             }
         }
 
+        // ENDER POWER!! (Ender pearl slot)
         this.addSlotToContainer(new SlotEnderPearls(te, 9, 93, 53));
+
+        // Result Slot
+        this.addSlotToContainer(new SlotResult(te, 10, 123, 34));
 
         //Player inventory
         for (int y = 0; y < 3; ++y) {
@@ -46,34 +53,47 @@ public class ContainerEnderCrafter extends Container
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int fromSlot) {
-        ItemStack previous = null;
-        Slot slot = (Slot) this.inventorySlots.get(fromSlot);
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    {
+        ItemStack itemstack = null;
+        Slot slot = (Slot)this.inventorySlots.get(index);
 
-        if (slot != null && slot.getHasStack()) {
-            ItemStack current = slot.getStack();
-            previous = current.copy();
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
 
-            if (fromSlot < 9) {
-                // From TE Inventory to Player Inventory
-                if (!this.mergeItemStack(current, 9, 45, true))
-                    return null;
-            } else {
-                // From Player Inventory to TE Inventory
-                if (!this.mergeItemStack(current, 0, 9, false))
+            if (index < 10)
+            {
+                if (!this.mergeItemStack(itemstack1, 10, 46, true))
                     return null;
             }
-
-            if (current.stackSize == 0)
-                slot.putStack((ItemStack) null);
+            else {
+                if (itemstack.getItem() instanceof ItemEnderPearl) {
+                    if (!this.mergeItemStack(itemstack1, 9, 9, false))
+                        return null;
+                } else if (!this.mergeItemStack(itemstack1, 0, 9, false)) {
+                    return null;
+                }
+            }
+            if (itemstack1.stackSize == 0)
+            {
+                slot.putStack((ItemStack)null);
+            }
             else
+            {
                 slot.onSlotChanged();
+            }
 
-            if (current.stackSize == previous.stackSize)
+            if (itemstack1.stackSize == itemstack.stackSize)
+            {
                 return null;
-            slot.onPickupFromSlot(playerIn, current);
+            }
+
+            slot.onPickupFromSlot(playerIn, itemstack1);
         }
-        return previous;
+
+        return itemstack;
     }
 
     @Override
@@ -85,7 +105,8 @@ public class ContainerEnderCrafter extends Container
     private class SlotEnderPearls extends Slot
     {
 
-        public SlotEnderPearls(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+        public SlotEnderPearls(IInventory inventoryIn, int index, int xPosition, int yPosition)
+        {
             super(inventoryIn, index, xPosition, yPosition);
         }
 
@@ -93,6 +114,21 @@ public class ContainerEnderCrafter extends Container
         public boolean isItemValid(ItemStack item)
         {
             return (item.getItem() instanceof ItemEnderPearl);
+        }
+    }
+
+    private class SlotResult extends Slot
+    {
+
+        public SlotResult(IInventory inventoryIn, int index, int xPosition, int yPosition)
+        {
+            super(inventoryIn, index, xPosition, yPosition);
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack item)
+        {
+            return false;
         }
     }
 }

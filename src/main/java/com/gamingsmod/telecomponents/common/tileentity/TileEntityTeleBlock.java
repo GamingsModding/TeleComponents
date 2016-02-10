@@ -25,59 +25,70 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory, ITick
 
     private int previousRedstoneInput;
 
-    public TileEntityTeleBlock() {
+    public TileEntityTeleBlock()
+    {
         this.inventory = new ItemStack[this.getSizeInventory()];
     }
 
-    public String getCustomName() {
+    public String getCustomName()
+    {
         return this.customName;
     }
 
-    public void setCustomName(String customName) {
+    public void setCustomName(String customName)
+    {
         this.customName = customName;
     }
 
-    public void setPlayerName(String name) {
+    public void setPlayerName(String name)
+    {
         this.placedBy = name;
     }
 
-    public String getPlayerName() {
+    public String getPlayerName()
+    {
         return this.placedBy;
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return this.hasCustomName() ? this.customName : "container.teleBlock";
     }
 
     @Override
-    public boolean hasCustomName() {
+    public boolean hasCustomName()
+    {
         return this.customName != null && !this.customName.equals("");
     }
 
     @Override
-    public IChatComponent getDisplayName() {
+    public IChatComponent getDisplayName()
+    {
         return this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName());
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getSizeInventory()
+    {
         return 1;
     }
 
     @Override
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getStackInSlot(int index)
+    {
         if (index < 0 || index >= this.getSizeInventory())
             return null;
         return this.inventory[index];
     }
 
     @Override
-    public ItemStack decrStackSize(int index, int count) {
+    public ItemStack decrStackSize(int index, int count)
+    {
         if (this.getStackInSlot(index) != null) {
             ItemStack itemstack;
 
-            if (this.getStackInSlot(index).stackSize <= count) {
+            if (this.getStackInSlot(index).stackSize <= count){
                 itemstack = this.getStackInSlot(index);
                 this.setInventorySlotContents(index, null);
                 this.markDirty();
@@ -101,14 +112,16 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack removeStackFromSlot(int index)
+    {
         ItemStack stack = this.getStackInSlot(index);
         this.setInventorySlotContents(index, null);
         return stack;
     }
 
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
+    public void setInventorySlotContents(int index, ItemStack stack)
+    {
         if (index < 0 || index >= this.getSizeInventory())
             return;
 
@@ -123,50 +136,54 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public int getInventoryStackLimit() {
+    public int getInventoryStackLimit()
+    {
         return 1;
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
+    public boolean isUseableByPlayer(EntityPlayer player)
+    {
         return this.worldObj.getTileEntity(this.getPos()) == this && player.getDistanceSq(this.pos.add(0.5, 0.5, 0.5)) <= 64;
     }
 
     @Override
-    public void openInventory(EntityPlayer player) {
-    }
+    public void openInventory(EntityPlayer player) {}
 
     @Override
-    public void closeInventory(EntityPlayer player) {
-    }
+    public void closeInventory(EntityPlayer player) {}
 
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
+    public boolean isItemValidForSlot(int index, ItemStack stack)
+    {
         return stack.getItem() instanceof ItemTelePos;
     }
 
     @Override
-    public int getField(int id) {
+    public int getField(int id)
+    {
         return 0;
     }
 
     @Override
-    public void setField(int id, int value) {
-    }
+    public void setField(int id, int value) {}
 
     @Override
-    public int getFieldCount() {
+    public int getFieldCount()
+    {
         return 0;
     }
 
     @Override
-    public void clear() {
+    public void clear()
+    {
         for (int i = 0; i < this.getSizeInventory(); i++)
             this.setInventorySlotContents(i, null);
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public void writeToNBT(NBTTagCompound nbt)
+    {
         super.writeToNBT(nbt);
 
         NBTTagList list = new NBTTagList();
@@ -187,7 +204,8 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory, ITick
 
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt)
+    {
         super.readFromNBT(nbt);
 
         NBTTagList list = nbt.getTagList("Items", 10);
@@ -203,7 +221,8 @@ public class TileEntityTeleBlock extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public void update() {
+    public void update()
+    {
         if (!worldObj.isRemote) {
             int currentInput = worldObj.getStrongPower(pos);
             EntityPlayer player = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5);

@@ -1,18 +1,21 @@
 package com.gamingsmod.telecomponents.common.item.tools;
 
 import com.gamingsmod.telecomponents.common.creativetab.CreativeTabTeleC;
-import com.gamingsmod.telecomponents.common.reference.Material;
 import com.gamingsmod.telecomponents.common.reference.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 
-public class ItemTeleSword extends ItemSword
+import java.util.Set;
+
+public class ItemToolTeleC extends ItemTool
 {
-    public ItemTeleSword()
+    public ItemToolTeleC(String name, float attackDamage, Item.ToolMaterial material, Set<Block> effectiveBlocks)
     {
-        super(Material.Tools.TELEINGOT);
-        this.setUnlocalizedName("teleIngotSword");
+        super(attackDamage, material, effectiveBlocks);
         this.setCreativeTab(CreativeTabTeleC.TELEC_TAB);
+        this.setUnlocalizedName(name);
     }
 
     @Override

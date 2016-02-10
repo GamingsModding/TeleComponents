@@ -1,33 +1,30 @@
 package com.gamingsmod.telecomponents.common.item.tools;
 
-import com.gamingsmod.telecomponents.common.creativetab.CreativeTabTeleC;
-import com.gamingsmod.telecomponents.common.reference.Reference;
-import net.minecraft.item.ItemPickaxe;
+import com.gamingsmod.telecomponents.common.reference.Material;
+import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-public class ItemTelePickaxe extends ItemPickaxe
+import java.util.Set;
+
+public class ItemTelePickaxe extends ItemToolTeleC
 {
-    public ItemTelePickaxe(ToolMaterial material)
+    private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] {Blocks.activator_rail, Blocks.coal_ore, Blocks.cobblestone, Blocks.detector_rail, Blocks.diamond_block, Blocks.diamond_ore, Blocks.double_stone_slab, Blocks.golden_rail, Blocks.gold_block, Blocks.gold_ore, Blocks.ice, Blocks.iron_block, Blocks.iron_ore, Blocks.lapis_block, Blocks.lapis_ore, Blocks.lit_redstone_ore, Blocks.mossy_cobblestone, Blocks.netherrack, Blocks.packed_ice, Blocks.rail, Blocks.redstone_ore, Blocks.sandstone, Blocks.red_sandstone, Blocks.stone, Blocks.stone_slab});
+
+    public ItemTelePickaxe()
     {
-        super(material);
-        this.setUnlocalizedName("teleIngotPickaxe");
-        this.setCreativeTab(CreativeTabTeleC.TELEC_TAB);
+        super("teleIngotPickaxe", 2.0F, Material.Tools.TELEINGOT, EFFECTIVE_ON);
     }
 
-    @Override
-    public String getUnlocalizedName()
+    //From ItemPickaxe
+    public boolean canHarvestBlock(Block blockIn)
     {
-        return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return blockIn == Blocks.obsidian ? this.toolMaterial.getHarvestLevel() == 3 : (blockIn != Blocks.diamond_block && blockIn != Blocks.diamond_ore ? (blockIn != Blocks.emerald_ore && blockIn != Blocks.emerald_block ? (blockIn != Blocks.gold_block && blockIn != Blocks.gold_ore ? (blockIn != Blocks.iron_block && blockIn != Blocks.iron_ore ? (blockIn != Blocks.lapis_block && blockIn != Blocks.lapis_ore ? (blockIn != Blocks.redstone_ore && blockIn != Blocks.lit_redstone_ore ? (blockIn.getMaterial() == net.minecraft.block.material.Material.rock ? true : (blockIn.getMaterial() == net.minecraft.block.material.Material.iron ? true : blockIn.getMaterial() == net.minecraft.block.material.Material.anvil)) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2);
     }
 
-    @Override
-    public String getUnlocalizedName(ItemStack itemStack)
+    public float getStrVsBlock(ItemStack stack, Block block)
     {
-        return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+        return block.getMaterial() != net.minecraft.block.material.Material.iron && block.getMaterial() != net.minecraft.block.material.Material.anvil && block.getMaterial() != net.minecraft.block.material.Material.rock ? super.getStrVsBlock(stack, block) : this.efficiencyOnProperMaterial;
     }
 }
