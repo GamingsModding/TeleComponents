@@ -79,10 +79,6 @@ public class ItemArmorTeleC extends ItemArmor {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        if (amat.toString().equals("teleingot")) {
-            list.add("Get the protection of the gods");
-        }
-
         if (!itemTooltip.equals("")) {
             list.add(itemTooltip);
         }
