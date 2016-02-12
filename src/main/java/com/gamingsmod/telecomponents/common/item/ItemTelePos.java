@@ -1,6 +1,7 @@
 package com.gamingsmod.telecomponents.common.item;
 
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
@@ -39,21 +40,31 @@ public class ItemTelePos extends ItemTeleC
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bol1)
-    {
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bol1) {
         int x = NBTHelper.getInt(itemStack, "xCoord");
         int y = NBTHelper.getInt(itemStack, "yCoord");
         int z = NBTHelper.getInt(itemStack, "zCoord");
         int dim = NBTHelper.getInt(itemStack, "dimNum");
         boolean coordsSet = NBTHelper.getBoolean(itemStack, "coordsSet");
 
-        if (coordsSet) {
-            WorldProvider targetWorld = WorldProvider.getProviderForDimension(dim);
+        if (!GuiScreen.isShiftKeyDown())
+            addStringToTooltip("help.telecomponents.hidden", list);
+        else {
+            addStringToTooltip("help.telecomponents.telePos", list);
 
-            list.add("X: " + x);
-            list.add("Y: " + y);
-            list.add("Z: " + z);
-            list.add("Dimension: " + dim + " (" + targetWorld.getDimensionName() + ")");
+            if (coordsSet) {
+                WorldProvider targetWorld = WorldProvider.getProviderForDimension(dim);
+
+                list.add("X: " + x);
+                list.add("Y: " + y);
+                list.add("Z: " + z);
+                list.add("Dimension: " + dim + " (" + targetWorld.getDimensionName() + ")");
+            }
         }
+    }
+
+    private void addStringToTooltip(String s, List tooltip)
+    {
+        tooltip.add(StatCollector.translateToLocal(s).replaceAll("&", "\u00a7"));
     }
 }

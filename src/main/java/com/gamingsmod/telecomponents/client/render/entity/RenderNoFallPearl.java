@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderNoFallPearl implements IRenderFactory
 {
-    private static final ResourceLocation resourceLocation = new ResourceLocation("minecraft:/items/ender_pearl.png");
+    private static final ResourceLocation resourceLocation = new ResourceLocation("minecraft:items/ender_pearl.png");
 
     @Override
     public Render createRenderFor(RenderManager manager)

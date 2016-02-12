@@ -32,3 +32,8 @@ tile.telecomponents:enderCrafter.name=Ender Crafter
 #Container
 container.teleBlock=TeleBlock
 container.enderCrafter=Ender Crafter
+
+#Help Text
+help.telecomponents.hidden=Hold &dShift&7 for more information
+help.telecomponents.telePos=Right click to set a position
+help.telecomponents.portTeleport=Right click a TeleBlock to set it

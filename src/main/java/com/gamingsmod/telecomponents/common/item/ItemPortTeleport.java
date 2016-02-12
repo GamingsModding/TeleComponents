@@ -5,21 +5,21 @@ import com.gamingsmod.telecomponents.common.helper.TimeHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.DimensionManager;
 
 import java.util.List;
 
-public class ItemPortTeleport extends ItemTeleC {
-    public ItemPortTeleport() {
+public class ItemPortTeleport extends ItemTeleC
+{
+    public ItemPortTeleport()
+    {
         super();
         this.setUnlocalizedName("portTeleportDevice");
         this.setMaxStackSize(1);
@@ -27,7 +27,8 @@ public class ItemPortTeleport extends ItemTeleC {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
         if (!world.isRemote) {
             if (stack.getItemDamage() == 0) {
                 int xCoord = NBTHelper.getInt(stack, "xCoord");
@@ -66,7 +67,8 @@ public class ItemPortTeleport extends ItemTeleC {
     }
 
     @Override
-    public void onUpdate(ItemStack stack, World world, Entity player, int int1, boolean bool1) {
+    public void onUpdate(ItemStack stack, World world, Entity player, int int1, boolean bool1)
+    {
         if (stack.getItemDamage() < stack.getMaxDamage())
             stack.setItemDamage(stack.getItemDamage() - 1);
     }
@@ -79,13 +81,24 @@ public class ItemPortTeleport extends ItemTeleC {
         int dim = NBTHelper.getInt(itemStack, "dimNum");
         boolean coordsSet = NBTHelper.getBoolean(itemStack, "coordsSet");
 
-        if (coordsSet) {
-            WorldProvider targetWorld = WorldProvider.getProviderForDimension(dim);
+        if (!GuiScreen.isShiftKeyDown())
+            addStringToTooltip("help.telecomponents.hidden", list);
+        else {
+            addStringToTooltip("help.telecomponents.portTeleport", list);
 
-            list.add("X: " + x);
-            list.add("Y: " + y);
-            list.add("Z: " + z);
-            list.add("Dimension: " + dim + " (" + targetWorld.getDimensionName() + ")");
+            if (coordsSet) {
+                WorldProvider targetWorld = WorldProvider.getProviderForDimension(dim);
+
+                list.add("X: " + x);
+                list.add("Y: " + y);
+                list.add("Z: " + z);
+                list.add("Dimension: " + dim + " (" + targetWorld.getDimensionName() + ")");
+            }
         }
+    }
+
+    private void addStringToTooltip(String s, List tooltip)
+    {
+        tooltip.add(StatCollector.translateToLocal(s).replaceAll("&", "\u00a7"));
     }
 }
