@@ -220,15 +220,12 @@ public class TileEntityEnderCrafter extends TileEntity implements ISidedInventor
         int[] result = {10};
         int[] crafting = {0,1,2,3,4,5,6,7,8,9};
 
-        if (side == EnumFacing.EAST || side == EnumFacing.WEST || side == EnumFacing.NORTH || side == EnumFacing.SOUTH) {
+        if (side == EnumFacing.EAST || side == EnumFacing.WEST || side == EnumFacing.NORTH || side == EnumFacing.SOUTH)
             return enderPearl;
-        } else if (side == EnumFacing.DOWN) {
+        else if (side == EnumFacing.DOWN)
             return result;
-        } else if (side == EnumFacing.UP) {
+        else
             return crafting;
-        }
-
-        return crafting;
     }
 
     @Override
@@ -241,6 +238,5 @@ public class TileEntityEnderCrafter extends TileEntity implements ISidedInventor
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
     {
         return direction == EnumFacing.DOWN && index == 10;
-
     }
 }

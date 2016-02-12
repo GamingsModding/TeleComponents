@@ -1,10 +1,13 @@
 package com.gamingsmod.telecomponents.common.item;
 
+//TODO: Hide tooltip until set
+
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
 
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class ItemTelePos extends ItemTeleC
         NBTHelper.setInteger(itemStack, "yCoord", pos.getY() + 1);
         NBTHelper.setInteger(itemStack, "zCoord", pos.getZ());
         NBTHelper.setInteger(itemStack, "dimNum", player.dimension);
+        NBTHelper.setBoolean(itemStack, "coordsSet", true);
 
         player.addChatComponentMessage(new ChatComponentText("Coordinates set to: X: " + pos.getX() + ", Y: " + (pos.getY() + 1) + ", Z: " + pos.getZ()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.LIGHT_PURPLE)));
         this.onItemRightClick(itemStack, world, player);
@@ -43,9 +47,15 @@ public class ItemTelePos extends ItemTeleC
         int y = NBTHelper.getInt(itemStack, "yCoord");
         int z = NBTHelper.getInt(itemStack, "zCoord");
         int dim = NBTHelper.getInt(itemStack, "dimNum");
-        list.add("X: " + x);
-        list.add("Y: " + y);
-        list.add("Z: " + z);
-        list.add("Dimension: " + dim);
+        boolean coordsSet = NBTHelper.getBoolean(itemStack, "coordsSet");
+
+        if (coordsSet) {
+            WorldProvider targetWorld = WorldProvider.getProviderForDimension(dim);
+
+            list.add("X: " + x);
+            list.add("Y: " + y);
+            list.add("Z: " + z);
+            list.add("Dimension: " + dim + " (" + targetWorld.getDimensionName() + ")");
+        }
     }
 }

@@ -39,6 +39,7 @@ public class BlockTeleBlock extends BlockContainerTeleC
                     NBTHelper.setInteger(playerItem, "xCoord", pos.getX());
                     NBTHelper.setInteger(playerItem, "yCoord", pos.getY() + 1);
                     NBTHelper.setInteger(playerItem, "zCoord", pos.getZ());
+                    NBTHelper.setBoolean(playerItem, "coordsSet", true);
                     return true;
                 }
             }
@@ -49,7 +50,7 @@ public class BlockTeleBlock extends BlockContainerTeleC
 
     // Code copied from BlockChest because it is easier to copy the code as it is the same as every inventory
     // in the game
-    // @source net.minecraft.block.BlockChest
+    // @source BlockChest
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {

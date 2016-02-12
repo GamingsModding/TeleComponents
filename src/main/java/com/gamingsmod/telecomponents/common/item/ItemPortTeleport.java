@@ -1,5 +1,7 @@
 package com.gamingsmod.telecomponents.common.item;
 
+//TODO: Hide tooltip until set
+
 import com.gamingsmod.telecomponents.common.helper.TeleportHelper;
 import com.gamingsmod.telecomponents.common.helper.TimeHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
@@ -13,6 +15,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.DimensionManager;
 
 import java.util.List;
@@ -76,9 +79,15 @@ public class ItemPortTeleport extends ItemTeleC {
         int y = NBTHelper.getInt(itemStack, "yCoord");
         int z = NBTHelper.getInt(itemStack, "zCoord");
         int dim = NBTHelper.getInt(itemStack, "dimNum");
-        list.add("X: " + x);
-        list.add("Y: " + y);
-        list.add("Z: " + z);
-        list.add("Dimension: " + dim);
+        boolean coordsSet = NBTHelper.getBoolean(itemStack, "coordsSet");
+
+        if (coordsSet) {
+            WorldProvider targetWorld = WorldProvider.getProviderForDimension(dim);
+
+            list.add("X: " + x);
+            list.add("Y: " + y);
+            list.add("Z: " + z);
+            list.add("Dimension: " + dim + " (" + targetWorld.getDimensionName() + ")");
+        }
     }
 }

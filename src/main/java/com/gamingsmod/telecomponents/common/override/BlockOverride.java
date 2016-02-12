@@ -2,9 +2,7 @@ package com.gamingsmod.telecomponents.common.override;
 
 import com.gamingsmod.telecomponents.common.init.ModItems;
 import net.minecraft.block.BlockObsidian;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -19,7 +17,10 @@ public class BlockOverride
             if (!e.isSilkTouching) {
                 e.drops.clear();
                 Random rand = new Random();
-                ItemStack stack = new ItemStack(ModItems.obsidianChunk, (rand.nextInt(4) + 1)*(e.fortuneLevel + 1));
+                int numDrops = rand.nextInt(4) + 1;
+                int fortuneLevel = e.fortuneLevel + 1;
+
+                ItemStack stack = new ItemStack(ModItems.obsidianChunk, numDrops * fortuneLevel);
                 e.drops.add(stack);
             }
         }
