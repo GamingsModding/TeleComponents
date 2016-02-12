@@ -1,10 +1,12 @@
 package com.gamingsmod.telecomponents.common.item;
 
+import com.gamingsmod.telecomponents.common.entity.EntityNoFallPearl;
 import com.gamingsmod.telecomponents.common.init.ModItems;
 import com.gamingsmod.telecomponents.common.reference.Reference;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -29,7 +31,7 @@ public class ItemEPGun extends ItemTeleC
 
             if(cooldown == 0)
             {
-                world.spawnEntityInWorld(new EntityEnderPearl(world, player));
+                world.spawnEntityInWorld(new EntityNoFallPearl(world, player));
                 stack.damageItem(49, player);
             }
         }
@@ -50,5 +52,25 @@ public class ItemEPGun extends ItemTeleC
 
         for (int i = 0; i < ICONS.length; i++)
             ModelBakery.registerItemVariants(ModItems.enderPearlGun, new ResourceLocation(Reference.MOD_ID.toLowerCase() + ":" + ICONS[i]));
+    }
+
+    public static ItemMeshDefinition registerMesh()
+    {
+        return new ItemMeshDefinition(){
+
+            @Override
+            public ModelResourceLocation getModelLocation(ItemStack stack) {
+                int cooldown = stack.getItemDamage();
+
+                if (cooldown >= (stack.getMaxDamage() / 4 * 3))
+                    return new ModelResourceLocation(Reference.MOD_ID + ":" + stack.getItem().getUnlocalizedName().substring(20) + "_3", "inventory");
+                else if (cooldown >= (stack.getMaxDamage() / 4 * 2))
+                    return new ModelResourceLocation(Reference.MOD_ID + ":" + stack.getItem().getUnlocalizedName().substring(20) + "_2", "inventory");
+                else if (cooldown >= (stack.getMaxDamage() / 4))
+                    return new ModelResourceLocation(Reference.MOD_ID + ":" + stack.getItem().getUnlocalizedName().substring(20) + "_1", "inventory");
+                else
+                    return new ModelResourceLocation(Reference.MOD_ID + ":" + stack.getItem().getUnlocalizedName().substring(20), "inventory");
+            }
+        };
     }
 }
