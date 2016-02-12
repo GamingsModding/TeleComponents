@@ -1,7 +1,5 @@
 package com.gamingsmod.telecomponents.common.item;
 
-//TODO: Hide tooltip until set
-
 import com.gamingsmod.telecomponents.common.helper.TeleportHelper;
 import com.gamingsmod.telecomponents.common.helper.TimeHelper;
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;

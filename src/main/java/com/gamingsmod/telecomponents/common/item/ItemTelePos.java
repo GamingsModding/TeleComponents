@@ -1,7 +1,5 @@
 package com.gamingsmod.telecomponents.common.item;
 
-//TODO: Hide tooltip until set
-
 import com.gamingsmod.telecomponents.common.utility.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
