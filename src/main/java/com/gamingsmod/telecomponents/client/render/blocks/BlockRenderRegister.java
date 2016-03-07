@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
-public class BlockRenderRegister
+public final class BlockRenderRegister
 {
     public static void init()
     {
