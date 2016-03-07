@@ -1,28 +1,18 @@
 package com.gamingsmod.telecomponents.client.render.entity;
 
-import net.minecraft.client.renderer.entity.Render;
+import com.gamingsmod.telecomponents.common.entity.EntityNoFallPearl;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.init.Items;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderNoFallPearl implements IRenderFactory
+public class RenderNoFallPearl extends RenderSnowball<EntityNoFallPearl>
 {
-    private static final ResourceLocation resourceLocation = new ResourceLocation("minecraft:items/ender_pearl.png");
-
-    @Override
-    public Render createRenderFor(RenderManager manager)
+    public RenderNoFallPearl(RenderManager manager)
     {
-        return new Render(manager)
-        {
-            @Override
-            protected ResourceLocation getEntityTexture(Entity entity)
-            {
-                return resourceLocation;
-            }
-        };
+        super(manager, Items.ender_pearl, Minecraft.getMinecraft().getRenderItem());
     }
 }

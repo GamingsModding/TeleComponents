@@ -2,7 +2,6 @@ package com.gamingsmod.telecomponents.common.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -49,8 +48,6 @@ public class EntityNoFallPearl extends EntityThrowable
             {
                 return;
             }
-
-            pos.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, entitylivingbase), 0.0F);
         }
 
         for (int i = 0; i < 32; ++i)
@@ -69,14 +66,6 @@ public class EntityNoFallPearl extends EntityThrowable
                     net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(entityplayermp, this.posX, this.posY, this.posZ, 0.0F);
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
                     { // Don't indent to lower patch size
-                        if (this.rand.nextFloat() < 0.05F && this.worldObj.getGameRules().getBoolean("doMobSpawning"))
-                        {
-                            EntityEndermite entityendermite = new EntityEndermite(this.worldObj);
-                            entityendermite.setSpawnedByPlayer(true);
-                            entityendermite.setLocationAndAngles(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, entitylivingbase.rotationYaw, entitylivingbase.rotationPitch);
-                            this.worldObj.spawnEntityInWorld(entityendermite);
-                        }
-
                         if (entitylivingbase.isRiding())
                         {
                             entitylivingbase.mountEntity((Entity)null);
